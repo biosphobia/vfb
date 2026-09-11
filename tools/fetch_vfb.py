@@ -122,6 +122,28 @@ def image_urls(image: dict[str, Any]) -> dict[str, str]:
     return out
 
 
+def parse_center(value: Any) -> list[float] | None:
+    """VFB serialises domain centres as a JSON string '{"X":..,"Y":..,"Z":..}' or a list."""
+    if value is None:
+        return None
+    if isinstance(value, str):
+        try:
+            value = json.loads(value)
+        except json.JSONDecodeError:
+            return None
+    if isinstance(value, dict):
+        try:
+            return [round(float(value[k]), 2) for k in ("X", "Y", "Z")]
+        except (KeyError, TypeError, ValueError):
+            return None
+    if isinstance(value, (list, tuple)) and len(value) == 3:
+        try:
+            return [round(float(c), 2) for c in value]
+        except (TypeError, ValueError):
+            return None
+    return None
+
+
 def pick_color(index: int, kind: str) -> list[float]:
     h = (index * 0.618033988749895) % 1.0
     if kind == "neuropil":
@@ -184,7 +206,11 @@ def main() -> None:
             oid = aind.get("short_form") or atype.get("short_form") or f"domain_{i}"
             urls = image_urls(dom.get("image") or dom)
             f.log(f"  neuropil {oid} {label}")
-            got = load_mesh_for(f, urls, ["obj"])
+            try:
+                got = load_mesh_for(f, urls, ["obj"])
+            except Exception as e:  # noqa: BLE001 - never let one object kill the build
+                f.log(f"  skipped {oid}: {type(e).__name__}: {e}")
+                continue
             if not got:
                 continue
             mesh, src, fmt = got
@@ -193,7 +219,7 @@ def main() -> None:
                 "id": oid, "label": label, "kind": "neuropil", "type_id": atype.get("short_form"),
                 "template": template_id, "source_url": src, "format": fmt,
                 "thumbnail": urls.get("thumbnail"), "color": pick_color(i, "neuropil"),
-                "center_um": [round(float(c), 2) for c in (dom.get("center") or [])] or None,
+                "center_um": parse_center(dom.get("center")),
             })
             if args.limit and len(objects) >= args.limit:
                 break
@@ -257,7 +283,11 @@ def main() -> None:
             continue
         urls = image_urls(img)
         f.log(f"  neuron {nid} {label}")
-        got = load_mesh_for(f, urls, prefer)
+        try:
+            got = load_mesh_for(f, urls, prefer)
+        except Exception as e:  # noqa: BLE001
+            f.log(f"  skipped {nid}: {type(e).__name__}: {e}")
+            continue
         if not got:
             continue
         mesh, src, fmt = got
@@ -280,14 +310,20 @@ def main() -> None:
     else:
         center = np.zeros(3)
 
+    written = []
     for o in objects:
-        mesh = meshes[o["id"]]
-        mesh = mc.simplify(mesh, max_faces)
-        mesh.vertices = mc.transform_points(mesh.vertices, UM_TO_MM, center)
-        fname = f"{o['id']}.glb"
-        mc.write_glb(mesh, args.out / fname, node_name=o["id"], rgba=o["color"])
-        o["file"] = fname
-        o["faces"] = int(len(mesh.faces))
+        try:
+            mesh = meshes[o["id"]]
+            mesh = mc.simplify(mesh, max_faces)
+            mesh.vertices = mc.transform_points(mesh.vertices, UM_TO_MM, center)
+            fname = f"{o['id']}.glb"
+            mc.write_glb(mesh, args.out / fname, node_name=o["id"], rgba=o["color"])
+            o["file"] = fname
+            o["faces"] = int(len(mesh.faces))
+            written.append(o)
+        except Exception as e:  # noqa: BLE001
+            f.log(f"  could not write {o['id']}: {type(e).__name__}: {e}")
+    objects = written
 
     manifest = {
         "generated_by": "tools/fetch_vfb.py",

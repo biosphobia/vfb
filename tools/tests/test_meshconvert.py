@@ -72,3 +72,12 @@ def test_build_fly_body_smoke(tmp_path):
 
 def test_fetch_vfb_help():
     subprocess.run([sys.executable, str(TOOLS / "fetch_vfb.py"), "--help"], check=True, capture_output=True)
+
+
+def test_parse_center_shapes():
+    import fetch_vfb as fv
+    assert fv.parse_center('{"X":605,"Y":283,"Z":87}') == [605.0, 283.0, 87.0]
+    assert fv.parse_center({"X": 1, "Y": 2, "Z": 3}) == [1.0, 2.0, 3.0]
+    assert fv.parse_center([1, 2, 3]) == [1.0, 2.0, 3.0]
+    assert fv.parse_center("garbage") is None
+    assert fv.parse_center(None) is None
