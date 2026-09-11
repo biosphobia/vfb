@@ -1,0 +1,15 @@
+# Generated data (built by tools/ scripts and CI)
+godot/assets/generated/
+build/
+.cache/
+
+# Godot editor cache
+godot/.godot/
+godot/*.tmp
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/

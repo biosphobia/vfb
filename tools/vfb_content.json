@@ -1,0 +1,20 @@
+{
+  "_comment": "Starter content bundled into the app by tools/fetch_vfb.py. Edit freely. IDs are VFB short forms; labels are resolved through VFB's SOLR index at build time.",
+  "template_id": "VFB_00101567",
+  "template_label": "JRC2018Unisex",
+  "neuropils": {
+    "source": "template_domains",
+    "max": 60
+  },
+  "neuron_classes": [
+    {"label": "adult antennal lobe projection neuron", "max_instances": 6},
+    {"label": "Kenyon cell", "max_instances": 6},
+    {"label": "adult descending neuron", "max_instances": 6},
+    {"label": "adult olfactory receptor neuron", "max_instances": 4},
+    {"label": "mushroom body output neuron", "max_instances": 4},
+    {"label": "adult central complex neuron", "max_instances": 4}
+  ],
+  "neuron_ids": [],
+  "prefer": ["obj", "swc"],
+  "max_faces_per_object": 60000
+}

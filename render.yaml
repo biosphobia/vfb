@@ -1,0 +1,25 @@
+# Render Blueprint – serves the Godot web export as a static site.
+#
+# The web build is produced by GitHub Actions (.github/workflows/build.yml)
+# and pushed to the `web-dist` branch; Render only serves that branch.
+# Connect the repo in the Render dashboard ("New +" -> "Blueprint") once the
+# first main build has created `web-dist`.
+#
+# The export uses Godot's non-threaded web variant, so no cross-origin
+# isolation headers (COOP/COEP) are required; that keeps cross-origin
+# requests to virtualflybrain.org working from the browser.
+services:
+  - type: web
+    name: vfb-fly-explorer
+    runtime: static
+    branch: web-dist
+    buildCommand: echo "prebuilt by GitHub Actions"
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: false
+    headers:
+      - path: /*.wasm
+        name: Content-Type
+        value: application/wasm
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=300

@@ -1,0 +1,187 @@
+name: Build
+
+# Every push to main: run the data pipeline, export Linux / Windows / macOS /
+# Web with Godot, publish a GitHub Release with the executables, and push the
+# web build to the `web-dist` branch (served by Render, see render.yaml).
+# Pull requests and manual runs build everything but do not publish.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  GODOT_VERSION: 4.4.1
+  APP_NAME: vfb-fly-explorer
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  assets:
+    name: Data pipeline (NeuroMechFly body + VFB starter set)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: tools/requirements.txt
+      - run: pip install -r tools/requirements.txt fast-simplification
+      - name: Unit tests
+        run: python -m pytest tools/tests -q
+      - name: Build fly body from NeuroMechFly
+        run: python tools/build_fly_body.py
+      - name: Fetch VFB starter set
+        # Tolerant by design: whatever VFB serves is bundled; failures are logged.
+        run: python tools/fetch_vfb.py
+      - name: Summary
+        run: |
+          echo "### Pipeline output" >> "$GITHUB_STEP_SUMMARY"
+          du -sh godot/assets/generated/* >> "$GITHUB_STEP_SUMMARY" || true
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, pathlib
+          p = pathlib.Path("godot/assets/generated/vfb/manifest.json")
+          if p.exists():
+              m = json.loads(p.read_text())
+              objs = m["objects"]
+              print(f"\n{sum(o['kind']=='neuropil' for o in objs)} neuropils, {sum(o['kind']=='neuron' for o in objs)} neurons, {len(m.get('errors', []))} failed requests")
+          else:
+              print("\nno VFB manifest produced")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: generated-assets
+          path: godot/assets/generated
+          if-no-files-found: error
+
+  export:
+    name: Export ${{ matrix.preset }}
+    needs: assets
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - preset: Linux
+            out: build/linux/vfb-fly-explorer.x86_64
+            artifact: vfb-fly-explorer-linux
+          - preset: Windows
+            out: build/windows/vfb-fly-explorer.exe
+            artifact: vfb-fly-explorer-windows
+          - preset: macOS
+            out: build/macos/vfb-fly-explorer.zip
+            artifact: vfb-fly-explorer-macos
+          - preset: Web
+            out: build/web/index.html
+            artifact: vfb-fly-explorer-web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: generated-assets
+          path: godot/assets/generated
+      - name: Cache Godot + export templates
+        id: godot-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/godot
+            ~/.local/share/godot/export_templates
+          key: godot-${{ env.GODOT_VERSION }}-v1
+      - name: Install Godot ${{ env.GODOT_VERSION }}
+        if: steps.godot-cache.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          mkdir -p ~/godot ~/.local/share/godot/export_templates
+          base="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable"
+          curl -sSL -o godot.zip "$base/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          unzip -q godot.zip -d ~/godot
+          mv ~/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64 ~/godot/godot
+          curl -sSL -o templates.tpz "$base/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+          unzip -q templates.tpz -d /tmp/tpl
+          mv /tmp/tpl/templates ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Import project
+        run: ~/godot/godot --headless --path godot --import
+      - name: Script self-test
+        run: ~/godot/godot --headless --path godot -s tests/test_parsers.gd
+      - name: Export ${{ matrix.preset }}
+        run: |
+          mkdir -p "$(dirname '${{ matrix.out }}')"
+          ~/godot/godot --headless --path godot --export-release "${{ matrix.preset }}" "../${{ matrix.out }}"
+          ls -la "$(dirname '${{ matrix.out }}')"
+      - name: Package
+        run: |
+          set -euo pipefail
+          cd build
+          case "${{ matrix.preset }}" in
+            Linux)   (cd linux && chmod +x vfb-fly-explorer.x86_64 && tar czf ../${{ matrix.artifact }}.tar.gz .) ;;
+            Windows) (cd windows && zip -qr ../${{ matrix.artifact }}.zip .) ;;
+            macOS)   cp macos/vfb-fly-explorer.zip ${{ matrix.artifact }}.zip ;;
+            Web)     (cd web && zip -qr ../${{ matrix.artifact }}.zip .) ;;
+          esac
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: |
+            build/${{ matrix.artifact }}.*
+            build/web
+          if-no-files-found: error
+
+  release:
+    name: Publish release
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: export
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+      - name: Collect files
+        run: |
+          mkdir -p out
+          find dist -maxdepth 2 -type f \( -name '*.zip' -o -name '*.tar.gz' \) -exec cp {} out/ \;
+          ls -la out
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: VFB Fly Explorer build ${{ github.run_number }}
+          body: |
+            Automated build from `${{ github.sha }}`.
+
+            * `vfb-fly-explorer-windows.zip` – Windows x86_64 (unsigned; SmartScreen may warn)
+            * `vfb-fly-explorer-linux.tar.gz` – Linux x86_64
+            * `vfb-fly-explorer-macos.zip` – macOS universal (unsigned; right-click → Open on first launch)
+            * `vfb-fly-explorer-web.zip` – static web build (also deployed via Render)
+          files: out/*
+          make_latest: true
+
+  web-publish:
+    name: Publish web build to web-dist
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: export
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: vfb-fly-explorer-web
+          path: dist
+      - name: Prepare
+        run: |
+          ls -R dist | head -40
+          test -f dist/web/index.html
+          echo "built from ${{ github.sha }} on $(date -u +%FT%TZ)" > dist/web/BUILD.txt
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: web-dist
+          publish_dir: dist/web
+          force_orphan: true
+          commit_message: "web build ${{ github.run_number }} from ${{ github.sha }}"
