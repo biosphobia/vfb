@@ -268,7 +268,7 @@ def main() -> None:
             f.log(f"neuron {nid}: no term info")
             continue
         core = info.get("term", {}).get("core", {})
-        label = core.get("label", nid)
+        label = core.get("label") or nid
         chans = info.get("channel_image") or []
         img = None
         for ch in chans:
