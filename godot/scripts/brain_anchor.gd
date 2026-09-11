@@ -54,6 +54,7 @@ func add_object(id: String, label: String, kind: String, mesh: Mesh, color: Colo
 		if meta.get("format", "") == "swc":
 			mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	mi.material_override = mat
+	mi.layers = 2  # visual layer 2: rendered by the brain view camera
 	mi.set_meta("vfb_id", id)
 	add_child(mi)
 

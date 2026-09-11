@@ -31,8 +31,10 @@ jobs:
           cache: pip
           cache-dependency-path: tools/requirements.txt
       - run: pip install -r tools/requirements.txt fast-simplification
-      - name: Unit tests
-        run: python -m pytest tools/tests -q
+      - name: Unit tests (pipeline + API server)
+        run: |
+          pip install -r server/requirements.txt
+          python -m pytest tools/tests server/tests -q
       - name: Build fly body from NeuroMechFly
         run: python tools/build_fly_body.py
       - name: Fetch VFB starter set

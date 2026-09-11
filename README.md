@@ -2,6 +2,7 @@
 
 A Godot 4 app that puts [Virtual Fly Brain](https://virtualflybrain.org) (VFB)
 anatomy inside a fully articulated fly body and lets you walk it around in 3D.
+Works on phones, tablets and PCs (web build) and as downloadable desktop apps.
 
 * **Body**: [NeuroMechFly v2](https://github.com/NeLy-EPFL/flygym) (EPFL),
   a micro-CT based *Drosophila* model with 69 jointed segments. A procedural
@@ -13,6 +14,16 @@ anatomy inside a fully articulated fly body and lets you walk it around in 3D.
   wing structures make it fly, antennal / olfactory structures twitch the
   antennae, mushroom body / central complex make it "think". Clicking the
   body startles it.
+
+* **Live brain view**: a picture-in-picture camera on the brain, with regions
+  glowing by function (seeing, smelling, steering, memory, moving…) according
+  to what the fly is doing. Illustrative, not a recording of real activity.
+* **Show it a video**: paste a YouTube link (or open `?v=VIDEO_ID`). The video
+  plays in an overlay, the fly turns to watch, and a reaction plan (mood plus
+  timed beats) drives its behaviour. Share the link so others see the same.
+* **Live story**: a running plain-language description of what the fly is
+  doing, how it feels and what it is paying attention to. Programmatic by
+  default; richer lines come from Claude when the API service has a key.
 
 Builds for Windows, Linux, macOS and the web are produced automatically on
 every push to `main` (see **Downloads**).
@@ -28,22 +39,30 @@ every push to `main` (see **Downloads**).
 
 ## Controls
 
+Phones and tablets: drag to orbit, pinch to zoom, two-finger drag to pan, tap a
+brain part to read about it, on-screen joystick to walk, buttons for Fly / Walk /
+Rest / Poke, and a tab bar (The fly · Brain part · Explore · Watch · More).
+
+PC:
+
 | Input | Action |
 | --- | --- |
 | W / S, ↑ / ↓ | walk forward / backward |
 | A / D, ← / → | turn |
-| Space, 1 / 2 / 3 | toggle flight; idle / walk / fly |
-| Left click | select neuron / neuropil (through the head), or poke the body |
+| Space, 1 / 2 / 3 | toggle flight; rest / walk / fly |
+| Left click | select a brain part (through the head), or poke the body |
 | Right-drag / middle-drag / wheel | orbit / pan / zoom |
-| F / Home / X | focus brain / focus fly / toggle x-ray body |
+| F / Home / X | look at brain / look at fly / see-through body |
 
-The bottom bar has behaviour buttons, gait sliders, display toggles, and
-**Brain placement** spin boxes to fine-tune where the template brain sits in
-the head (mm, head frame) and its scale.
+"More" holds the view toggles, walking speed, and the **Advanced** brain
+placement controls (offset in mm in the head frame, and scale).
 
 ## Repository layout
 
 ```
+server/               Optional API service (FastAPI): YouTube metadata, Claude narration
+  app.py              /api/health /api/youtube /api/narrate /api/react (all with fallbacks)
+  tests/              pytest (no network, Claude client mocked)
 tools/                Python data pipeline (run before opening the Godot project)
   build_fly_body.py   NeuroMechFly meshes + rig  -> godot/assets/generated/fly/fly_body.glb + fly_rig.json
   fetch_vfb.py        VFB starter set (SOLR API) -> godot/assets/generated/vfb/*.glb + manifest.json
@@ -57,7 +76,14 @@ godot/                Godot 4.4 project
   scripts/brain_anchor.gd   VFB objects inside the head, selection, calibration
   scripts/vfb_client.gd     async VFB SOLR / image client (desktop + web)
   scripts/obj_parser.gd, swc_parser.gd, mesh_util.gd   runtime mesh loading
-  scripts/explorer_ui.gd    all UI (built in code)
+  scripts/explorer_ui.gd    all UI (built in code; desktop + compact touch layouts)
+  scripts/brain_activity.gd functional "activity" model that lights up regions
+  scripts/brain_view.gd     picture-in-picture brain camera (visual layer 2)
+  scripts/narrator.gd       live doing / feeling / focus text, optional AI lines
+  scripts/youtube_watch.gd  YouTube link parsing, metadata, reaction plans & beats
+  scripts/web_bridge.gd     JavaScriptBridge wrapper (video overlay, share links)
+  scripts/virtual_joystick.gd on-screen joystick
+  web/shell.html      custom HTML shell: loading screen, YouTube overlay, config
   scripts/placeholder_fly.gd  boxy stand-in body when the pipeline has not run
   assets/fly_rig_default.json  rig metadata derived from NeuroMechFly (committed)
   export_presets.cfg  Linux / Windows / macOS / Web presets
@@ -116,19 +142,38 @@ Pull requests run steps 1–2 only.
 
 ## Deploying the web build (Render)
 
-`render.yaml` defines a static site that serves the `web-dist` branch with no
-build step. After the first `main` build has created that branch:
+`render.yaml` defines two services:
 
-1. Render dashboard → **New +** → **Blueprint**, pick this repository.
-2. Render creates the `vfb-fly-explorer` static site; every later push to
-   `main` redeploys automatically once CI updates `web-dist`.
+* `vfb-fly-explorer` – static site serving the `web-dist` branch (no build step).
+* `vfb-fly-explorer-api` – small Python service from `main` (`server/`). It
+  holds the **`ANTHROPIC_API_KEY`** secret (declared with `sync: false`, so
+  Render asks you for the value when you create the Blueprint; leave it empty
+  to run without AI). It also proxies YouTube metadata and builds reaction
+  plans. `VFB_MODEL` defaults to `claude-opus-5`; set it to `claude-haiku-4-5`
+  for a cheaper narrator.
+
+After the first `main` build has created `web-dist`:
+
+1. Render dashboard → **New +** → **Blueprint**, pick this repository, paste
+   your Claude API key when prompted (optional).
+2. Render creates both services; every later push to `main` redeploys the API
+   and, once CI updates `web-dist`, the site.
+
+The web app looks for the API at `https://vfb-fly-explorer-api.onrender.com`
+(set in `godot/web/shell.html`). If Render gives your service a different
+URL, change it there or open the site with `?api=https://your-service`.
+Desktop builds read `VFB_API_BASE` from the environment. Without the API
+everything still works: narration and video reactions fall back to the
+built-in programmatic versions, and video titles come from noembed.com.
 
 The export is Godot's non-threaded web variant, so no COOP/COEP headers are
 needed and cross-origin requests to virtualflybrain.org keep working. The same
 branch also works with GitHub Pages if you prefer.
 
-Web caveats: no shadows, first load is ~45 MB of wasm, and live VFB downloads
-depend on the browser's CORS rules (the bundled starter set always works).
+Web caveats: no shadows, first load is ~45 MB of wasm, live VFB downloads
+depend on the browser's CORS rules (the bundled starter set always works), and
+the YouTube overlay is an iframe on top of the canvas, so it only exists in the
+web build (desktop builds show the thumbnail and a "Play reaction" button).
 
 ## Coordinate frames
 

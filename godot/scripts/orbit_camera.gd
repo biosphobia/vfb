@@ -16,6 +16,10 @@ var _dragging := false
 var _panning := false
 var _last_mouse := Vector2.ZERO
 var _smooth_target := Vector3.ZERO
+var _touches := {}       # index -> position
+var _pinch_dist := 0.0
+var _pinch_mid := Vector2.ZERO
+var touch_orbit_enabled := true
 
 
 func _ready() -> void:
@@ -31,7 +35,9 @@ func _ready() -> void:
 
 func focus_on(center: Vector3, radius: float) -> void:
 	target = center
-	distance = clampf(radius * 2.6, min_distance, max_distance)
+	var vs := get_viewport().get_visible_rect().size if is_inside_tree() else Vector2(16, 9)
+	var portrait := maxf(1.0, vs.y / maxf(vs.x, 1.0))  # portrait screens need more distance
+	distance = clampf(radius * 2.6 * portrait, min_distance, max_distance)
 	_update()
 
 
@@ -49,6 +55,39 @@ func _process(delta: float) -> void:
 
 
 func handle_input(event: InputEvent) -> bool:
+	if event is InputEventScreenTouch:
+		var t := event as InputEventScreenTouch
+		if t.pressed:
+			_touches[t.index] = t.position
+		else:
+			_touches.erase(t.index)
+		if _touches.size() == 2:
+			var pts := _touches.values()
+			_pinch_dist = (pts[0] as Vector2).distance_to(pts[1])
+			_pinch_mid = ((pts[0] as Vector2) + pts[1]) * 0.5
+		return false  # let taps through for picking
+	if event is InputEventScreenDrag:
+		var d := event as InputEventScreenDrag
+		_touches[d.index] = d.position
+		if _touches.size() >= 2:
+			var pts := _touches.values()
+			var dist: float = (pts[0] as Vector2).distance_to(pts[1])
+			var mid: Vector2 = ((pts[0] as Vector2) + pts[1]) * 0.5
+			if _pinch_dist > 1.0:
+				distance = clampf(distance * (_pinch_dist / maxf(dist, 1.0)), min_distance, max_distance)
+			var rot := Basis.from_euler(Vector3(-pitch, yaw, 0.0))
+			var scale := distance * 0.0016
+			var delta := mid - _pinch_mid
+			target += rot * Vector3(-delta.x * scale, delta.y * scale, 0.0)
+			follow = null
+			_pinch_dist = dist
+			_pinch_mid = mid
+			return true
+		if touch_orbit_enabled:
+			yaw -= d.relative.x * 0.008
+			pitch = clampf(pitch + d.relative.y * 0.008, deg_to_rad(-85.0), deg_to_rad(85.0))
+			return true
+		return false
 	if event is InputEventMouseButton:
 		var mb := event as InputEventMouseButton
 		if mb.button_index == MOUSE_BUTTON_WHEEL_UP:

@@ -49,6 +49,13 @@ var _startle := 0.0
 var _react_walk := 0.0
 var _react_antenna := 0.0
 var _react_think := 0.0
+var _react_feed := 0.0
+var _react_groove := 0.0
+var _rest := 0.0          # 0..1 sleepy factor
+var look_yaw_deg := 0.0    # head target set by the owner (e.g. face the screen)
+var look_pitch_deg := 0.0
+var _look_yaw := 0.0
+var _look_pitch := 0.0
 var _rng := RandomNumberGenerator.new()
 
 
@@ -69,6 +76,20 @@ func setup(model_root: Node, rig: Dictionary) -> void:
 		_stride_mm = maxf(0.2, per10 / 10.0 * stride_deg * 2.0)
 	_rng.randomize()
 	set_process(true)
+
+
+func is_reacting() -> String:
+	if _startle > 0.0:
+		return "startle"
+	if _react_feed > 0.0:
+		return "feed"
+	if _react_groove > 0.0:
+		return "groove"
+	if _react_antenna > 0.0:
+		return "antenna"
+	if _react_think > 0.0:
+		return "think"
+	return ""
 
 
 func joint_count() -> int:
@@ -98,6 +119,16 @@ func react(kind: String, seconds: float = 4.0) -> void:
 			_react_antenna = seconds
 		"think":
 			_react_think = seconds
+		"feed":
+			_react_feed = seconds
+		"groove":
+			_react_groove = seconds
+		"rest":
+			_rest = 1.0
+		"startle":
+			_startle = minf(seconds, 1.6)
+		"look":
+			pass  # handled through look_yaw_deg / look_pitch_deg
 
 
 func _process(delta: float) -> void:
@@ -109,6 +140,11 @@ func _process(delta: float) -> void:
 	_react_walk = maxf(0.0, _react_walk - delta)
 	_react_antenna = maxf(0.0, _react_antenna - delta)
 	_react_think = maxf(0.0, _react_think - delta)
+	_react_feed = maxf(0.0, _react_feed - delta)
+	_react_groove = maxf(0.0, _react_groove - delta)
+	_rest = maxf(0.0, _rest - delta * 0.08)
+	_look_yaw = lerpf(_look_yaw, look_yaw_deg, minf(1.0, delta * 3.0))
+	_look_pitch = lerpf(_look_pitch, look_pitch_deg, minf(1.0, delta * 3.0))
 
 	var moving := _drive_hold > 0.0
 	var want_walk := behaviour == Behaviour.WALK or (behaviour == Behaviour.IDLE and (moving or _react_walk > 0.0))
@@ -148,7 +184,23 @@ func _acc_dof(pose: Dictionary, leg: String, dof_spec: String, deg: float) -> vo
 
 
 func _idle_pose(pose: Dictionary) -> void:
-	var k := idle_amount * (1.0 + 3.0 * minf(1.0, _react_antenna))
+	var k := idle_amount * (1.0 + 3.0 * minf(1.0, _react_antenna)) * (1.0 - 0.7 * _rest)
+	_acc(pose, "c_head", "roll", _look_yaw)
+	_acc(pose, "c_head", "pitch", _look_pitch)
+	if _react_feed > 0.0:
+		var e := minf(1.0, _react_feed)
+		_acc(pose, "c_rostrum", "pitch", 35.0 * e + sin(_t * 4.0) * 6.0 * e)
+		_acc(pose, "c_haustellum", "pitch", 30.0 * e)
+		_acc(pose, "c_head", "pitch", 10.0 * e)
+	if _react_groove > 0.0:
+		var g := minf(1.0, _react_groove)
+		var bpm := _t * 2.0 * TAU
+		_acc(pose, "c_head", "pitch", sin(bpm) * 9.0 * g)
+		_acc(pose, "c_head", "roll", sin(bpm * 0.5) * 8.0 * g)
+		_acc(pose, "c_abdomen12", "pitch", sin(bpm) * 5.0 * g)
+		for wing in _wings:
+			var m: Dictionary = _wings[wing]
+			_acc(pose, wing, m.get("flap_dof", "yaw"), maxf(0.0, sin(bpm * 2.0)) * 18.0 * g * float(m.get("flap_sign_up", 1)))
 	if _react_think > 0.0:
 		# "thinking": head bobs and the proboscis extends a little
 		_acc(pose, "c_head", "pitch", sin(_t * 6.0) * 5.0)
