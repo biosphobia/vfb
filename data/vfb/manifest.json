@@ -1,0 +1,1768 @@
+{
+  "generated_by": "tools/fetch_vfb.py",
+  "template": {
+    "id": "VFB_00101567",
+    "label": "JRC2018Unisex"
+  },
+  "units": "mm",
+  "template_center_um": [
+    313.053,
+    148.815,
+    84.723
+  ],
+  "um_to_mm": 0.001,
+  "objects": [
+    {
+      "id": "VFB_00102273",
+      "label": "antennal mechanosensory and motor center",
+      "kind": "neuropil",
+      "type_id": "FBbt_00003982",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2273/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2273/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.552,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102273.glb",
+      "faces": 11808
+    },
+    {
+      "id": "VFB_00102121",
+      "label": "adult mushroom body alpha'-lobe",
+      "kind": "neuropil",
+      "type_id": "FBbt_00013691",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2121/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2121/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.639,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102121.glb",
+      "faces": 2872
+    },
+    {
+      "id": "VFB_00102123",
+      "label": "adult mushroom body beta-lobe",
+      "kind": "neuropil",
+      "type_id": "FBbt_00110658",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2123/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2123/VFB_00101567/thumbnail.png",
+      "color": [
+        0.726,
+        0.85,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102123.glb",
+      "faces": 4008
+    },
+    {
+      "id": "VFB_00102282",
+      "label": "nodulus",
+      "kind": "neuropil",
+      "type_id": "FBbt_00003680",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2282/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2282/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.552,
+        0.813,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102282.glb",
+      "faces": 1316
+    },
+    {
+      "id": "VFB_00102214",
+      "label": "gorget",
+      "kind": "neuropil",
+      "type_id": "FBbt_00040039",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2214/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2214/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.85,
+        0.8,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102214.glb",
+      "faces": 4336
+    },
+    {
+      "id": "VFB_00102146",
+      "label": "anterior ventrolateral protocerebrum",
+      "kind": "neuropil",
+      "type_id": "FBbt_00040043",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2146/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2146/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.713,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102146.glb",
+      "faces": 22864
+    },
+    {
+      "id": "VFB_00102274",
+      "label": "flange",
+      "kind": "neuropil",
+      "type_id": "FBbt_00045050",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2274/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2274/VFB_00101567/thumbnail.png",
+      "color": [
+        0.627,
+        0.552,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102274.glb",
+      "faces": 5584
+    },
+    {
+      "id": "VFB_00102185",
+      "label": "inferior bridge",
+      "kind": "neuropil",
+      "type_id": "FBbt_00040050",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2185/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2185/VFB_00101567/thumbnail.png",
+      "color": [
+        0.565,
+        0.85,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102185.glb",
+      "faces": 6056
+    },
+    {
+      "id": "VFB_00102276",
+      "label": "prow",
+      "kind": "neuropil",
+      "type_id": "FBbt_00040051",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2276/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2276/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.552,
+        0.652,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102276.glb",
+      "faces": 4288
+    },
+    {
+      "id": "VFB_00102190",
+      "label": "antler",
+      "kind": "neuropil",
+      "type_id": "FBbt_00045039",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2190/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2190/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.739,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102190.glb",
+      "faces": 3520
+    },
+    {
+      "id": "VFB_00102179",
+      "label": "inferior clamp",
+      "kind": "neuropil",
+      "type_id": "FBbt_00040049",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2179/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2179/VFB_00101567/thumbnail.png",
+      "color": [
+        0.826,
+        0.85,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102179.glb",
+      "faces": 10332
+    },
+    {
+      "id": "VFB_00102201",
+      "label": "adult antennal lobe",
+      "kind": "neuropil",
+      "type_id": "FBbt_00007401",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2201/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2201/VFB_00101567/thumbnail.png",
+      "color": [
+        0.788,
+        0.552,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102201.glb",
+      "faces": 15992
+    },
+    {
+      "id": "VFB_00102218",
+      "label": "inferior posterior slope",
+      "kind": "neuropil",
+      "type_id": "FBbt_00045046",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2218/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2218/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.85,
+        0.701,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102218.glb",
+      "faces": 8224
+    },
+    {
+      "id": "VFB_00102140",
+      "label": "adult lateral accessory lobe",
+      "kind": "neuropil",
+      "type_id": "FBbt_00003681",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2140/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2140/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.614,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102140.glb",
+      "faces": 13304
+    },
+    {
+      "id": "VFB_00102134",
+      "label": "fan-shaped body",
+      "kind": "neuropil",
+      "type_id": "FBbt_00003679",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2134/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2134/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.578,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102134.glb",
+      "faces": 7052
+    },
+    {
+      "id": "VFB_00102281",
+      "label": "gall",
+      "kind": "neuropil",
+      "type_id": "FBbt_00040060",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2281/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2281/VFB_00101567/thumbnail.png",
+      "color": [
+        0.665,
+        0.85,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102281.glb",
+      "faces": 1000
+    },
+    {
+      "id": "VFB_00102159",
+      "label": "adult lateral horn",
+      "kind": "neuropil",
+      "type_id": "FBbt_00007053",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2159/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2159/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.552,
+        0.751,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102159.glb",
+      "faces": 10040
+    },
+    {
+      "id": "VFB_00102171",
+      "label": "adult crepine",
+      "kind": "neuropil",
+      "type_id": "FBbt_00045037",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2171/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2171/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.838,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102171.glb",
+      "faces": 11452
+    },
+    {
+      "id": "VFB_00102170",
+      "label": "superior medial protocerebrum",
+      "kind": "neuropil",
+      "type_id": "FBbt_00007055",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2170/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2170/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.775,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102170.glb",
+      "faces": 18700
+    },
+    {
+      "id": "VFB_00102154",
+      "label": "wedge",
+      "kind": "neuropil",
+      "type_id": "FBbt_00045027",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2154/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2154/VFB_00101567/thumbnail.png",
+      "color": [
+        0.688,
+        0.552,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102154.glb",
+      "faces": 14892
+    },
+    {
+      "id": "VFB_00102139",
+      "label": "bulb",
+      "kind": "neuropil",
+      "type_id": "FBbt_00003682",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2139/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2139/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.85,
+        0.601,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102139.glb",
+      "faces": 1944
+    },
+    {
+      "id": "VFB_00102124",
+      "label": "adult mushroom body beta'-lobe",
+      "kind": "neuropil",
+      "type_id": "FBbt_00013694",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2124/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2124/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.552,
+        0.59,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102124.glb",
+      "faces": 3844
+    },
+    {
+      "id": "VFB_00102148",
+      "label": "posterior ventrolateral protocerebrum",
+      "kind": "neuropil",
+      "type_id": "FBbt_00040042",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2148/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2148/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.677,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102148.glb",
+      "faces": 18140
+    },
+    {
+      "id": "VFB_00102176",
+      "label": "superior clamp",
+      "kind": "neuropil",
+      "type_id": "FBbt_00040048",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2176/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2176/VFB_00101567/thumbnail.png",
+      "color": [
+        0.764,
+        0.85,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102176.glb",
+      "faces": 11808
+    },
+    {
+      "id": "VFB_00102175",
+      "label": "rubus",
+      "kind": "neuropil",
+      "type_id": "FBbt_00040038",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2175/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2175/VFB_00101567/thumbnail.png",
+      "color": [
+        0.849,
+        0.552,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102175.glb",
+      "faces": 472
+    },
+    {
+      "id": "VFB_00102133",
+      "label": "adult mushroom body gamma-lobe",
+      "kind": "neuropil",
+      "type_id": "FBbt_00013695",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2133/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2133/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.85,
+        0.762,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102133.glb",
+      "faces": 9128
+    },
+    {
+      "id": "VFB_00102119",
+      "label": "adult mushroom body alpha-lobe",
+      "kind": "neuropil",
+      "type_id": "FBbt_00110657",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2119/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2119/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.675,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102119.glb",
+      "faces": 4828
+    },
+    {
+      "id": "VFB_00102280",
+      "label": "adult gnathal ganglion",
+      "kind": "neuropil",
+      "type_id": "FBbt_00014013",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2280/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2280/VFB_00101567/thumbnail.png",
+      "color": [
+        0.589,
+        0.552,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102280.glb",
+      "faces": 31152
+    },
+    {
+      "id": "VFB_00102162",
+      "label": "superior lateral protocerebrum",
+      "kind": "neuropil",
+      "type_id": "FBbt_00007054",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2162/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2162/VFB_00101567/thumbnail.png",
+      "color": [
+        0.603,
+        0.85,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102162.glb",
+      "faces": 17472
+    },
+    {
+      "id": "VFB_00102107",
+      "label": "medulla",
+      "kind": "neuropil",
+      "type_id": "FBbt_00003748",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2107/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2107/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.552,
+        0.69,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102107.glb",
+      "faces": 60000
+    },
+    {
+      "id": "VFB_00102164",
+      "label": "superior intermediate protocerebrum",
+      "kind": "neuropil",
+      "type_id": "FBbt_00045032",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2164/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2164/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.777,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102164.glb",
+      "faces": 12024
+    },
+    {
+      "id": "VFB_00102114",
+      "label": "calyx of adult mushroom body",
+      "kind": "neuropil",
+      "type_id": "FBbt_00007385",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2114/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2114/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.836,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102114.glb",
+      "faces": 5644
+    },
+    {
+      "id": "VFB_00102152",
+      "label": "posterior lateral protocerebrum",
+      "kind": "neuropil",
+      "type_id": "FBbt_00040044",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2152/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2152/VFB_00101567/thumbnail.png",
+      "color": [
+        0.75,
+        0.552,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102152.glb",
+      "faces": 20508
+    },
+    {
+      "id": "VFB_00102174",
+      "label": "adult round body",
+      "kind": "neuropil",
+      "type_id": "FBbt_00048509",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2174/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2174/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.85,
+        0.663,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102174.glb",
+      "faces": 524
+    },
+    {
+      "id": "VFB_00102141",
+      "label": "anterior optic tubercle",
+      "kind": "neuropil",
+      "type_id": "FBbt_00007059",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2141/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2141/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.576,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102141.glb",
+      "faces": 5760
+    },
+    {
+      "id": "VFB_00102275",
+      "label": "cantle",
+      "kind": "neuropil",
+      "type_id": "FBbt_00045051",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2275/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2275/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.616,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102275.glb",
+      "faces": 2180
+    },
+    {
+      "id": "VFB_00102118",
+      "label": "pedunculus of adult mushroom body",
+      "kind": "neuropil",
+      "type_id": "FBbt_00007453",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2118/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2118/VFB_00101567/thumbnail.png",
+      "color": [
+        0.703,
+        0.85,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102118.glb",
+      "faces": 2916
+    },
+    {
+      "id": "VFB_00102110",
+      "label": "lobula plate",
+      "kind": "neuropil",
+      "type_id": "FBbt_00003885",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2110/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2110/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.552,
+        0.789,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102110.glb",
+      "faces": 24916
+    },
+    {
+      "id": "VFB_00102137",
+      "label": "protocerebral bridge",
+      "kind": "neuropil",
+      "type_id": "FBbt_00003668",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2137/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2137/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.85,
+        0.824,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102137.glb",
+      "faces": 2808
+    },
+    {
+      "id": "VFB_00102215",
+      "label": "superior posterior slope",
+      "kind": "neuropil",
+      "type_id": "FBbt_00045040",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2215/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2215/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.737,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102215.glb",
+      "faces": 15140
+    },
+    {
+      "id": "VFB_00102271",
+      "label": "saddle",
+      "kind": "neuropil",
+      "type_id": "FBbt_00045048",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2271/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2271/VFB_00101567/thumbnail.png",
+      "color": [
+        0.65,
+        0.552,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102271.glb",
+      "faces": 23604
+    },
+    {
+      "id": "VFB_00102213",
+      "label": "epaulette",
+      "kind": "neuropil",
+      "type_id": "FBbt_00040040",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2213/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2213/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.85,
+        0.563,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102213.glb",
+      "faces": 3668
+    },
+    {
+      "id": "VFB_00102108",
+      "label": "accessory medulla",
+      "kind": "neuropil",
+      "type_id": "FBbt_00045003",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2108/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2108/VFB_00101567/thumbnail.png",
+      "color": [
+        0.85,
+        0.552,
+        0.628,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102108.glb",
+      "faces": 1580
+    },
+    {
+      "id": "VFB_00102135",
+      "label": "ellipsoid body",
+      "kind": "neuropil",
+      "type_id": "FBbt_00003678",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2135/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2135/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.715,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102135.glb",
+      "faces": 3284
+    },
+    {
+      "id": "VFB_00102109",
+      "label": "lobula",
+      "kind": "neuropil",
+      "type_id": "FBbt_00003852",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2109/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2109/VFB_00101567/thumbnail.png",
+      "color": [
+        0.802,
+        0.85,
+        0.552,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102109.glb",
+      "faces": 27472
+    },
+    {
+      "id": "VFB_00102212",
+      "label": "vest",
+      "kind": "neuropil",
+      "type_id": "FBbt_00040041",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/2212/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/2212/VFB_00101567/thumbnail.png",
+      "color": [
+        0.811,
+        0.552,
+        0.85,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00102212.glb",
+      "faces": 11632
+    },
+    {
+      "id": "VFB_00101567",
+      "label": "adult brain",
+      "kind": "neuropil",
+      "type_id": "FBbt_00003624",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/1567/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/1567/VFB_00101567/thumbnail.png",
+      "color": [
+        0.552,
+        0.85,
+        0.724,
+        0.28
+      ],
+      "center_um": null,
+      "file": "VFB_00101567.glb",
+      "faces": 60000
+    },
+    {
+      "id": "VFB_00106cc6",
+      "label": "BANC_888:720575941438968661",
+      "kind": "neuron",
+      "class_label": "T4 neuron",
+      "class_id": "FBbt_00003731",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/6cc6/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/6cc6/VFB_00101567/thumbnail.png",
+      "color": [
+        0.847,
+        0.15,
+        1.0,
+        1.0
+      ],
+      "dataset": "Brain and Nerve Cord (BANC) version 888 connectome neurons from Bates et al. (2026).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_00106cc6.glb",
+      "faces": 59999
+    },
+    {
+      "id": "VFB_00105rwv",
+      "label": "BANC_888:720575941512047948",
+      "kind": "neuron",
+      "class_label": "T4 neuron",
+      "class_id": "FBbt_00003731",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/5rwv/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/5rwv/VFB_00101567/thumbnail.png",
+      "color": [
+        0.15,
+        1.0,
+        0.599,
+        1.0
+      ],
+      "dataset": "Brain and Nerve Cord (BANC) version 888 connectome neurons from Bates et al. (2026).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_00105rwv.glb",
+      "faces": 45024
+    },
+    {
+      "id": "VFB_jrmc0u10",
+      "label": "T5d_L (MaleCNS:67445)",
+      "kind": "neuron",
+      "class_label": "T5 neuron",
+      "class_id": "FBbt_00003736",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/jrmc/0u10/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/jrmc/0u10/VFB_00101567/thumbnail.png",
+      "color": [
+        1.0,
+        0.351,
+        0.15,
+        1.0
+      ],
+      "dataset": "Male CNS version 1.0 connectome neurons from Berg et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_jrmc0u10.glb",
+      "faces": 49605
+    },
+    {
+      "id": "VFB_jrmc0nfv",
+      "label": "T5d_L (MaleCNS:110605)",
+      "kind": "neuron",
+      "class_label": "T5 neuron",
+      "class_id": "FBbt_00003736",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/jrmc/0nfv/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/jrmc/0nfv/VFB_00101567/thumbnail.png",
+      "color": [
+        0.15,
+        0.197,
+        1.0,
+        1.0
+      ],
+      "dataset": "Male CNS version 0.9 connectome neurons from Berg et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_jrmc0nfv.glb",
+      "faces": 55302
+    },
+    {
+      "id": "VFB_00105gm6",
+      "label": "BANC_888:720575941551745563",
+      "kind": "neuron",
+      "class_label": "lobula columnar neuron LC4",
+      "class_id": "FBbt_00003874",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/5gm6/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/5gm6/VFB_00101567/thumbnail.png",
+      "color": [
+        0.445,
+        1.0,
+        0.15,
+        1.0
+      ],
+      "dataset": "Brain and Nerve Cord (BANC) version 626 connectome neurons from Bates et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_00105gm6.glb",
+      "faces": 60000
+    },
+    {
+      "id": "VFB_00007415",
+      "label": "VGlut-F-600693",
+      "kind": "neuron",
+      "class_label": "lobula columnar neuron LC4",
+      "class_id": "FBbt_00003874",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0000/7415/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0000/7415/VFB_00101567/thumbnail.png",
+      "color": [
+        1.0,
+        0.15,
+        0.693,
+        1.0
+      ],
+      "dataset": "FlyCircuit 1.0 - single neurons (Chiang2010)",
+      "license": "FlyCircuit License",
+      "description": "",
+      "file": "VFB_00007415.glb",
+      "faces": 14480
+    },
+    {
+      "id": "VFB_jrmc23q8",
+      "label": "LPLC2_R (MaleCNS:55627)",
+      "kind": "neuron",
+      "class_label": "lobula plate-lobula columnar neuron LPLC2",
+      "class_id": "FBbt_00111763",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/jrmc/23q8/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/jrmc/23q8/VFB_00101567/thumbnail.png",
+      "color": [
+        0.15,
+        0.941,
+        1.0,
+        1.0
+      ],
+      "dataset": "Male CNS version 0.9 connectome neurons from Berg et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_jrmc23q8.glb",
+      "faces": 59999
+    },
+    {
+      "id": "VFB_fw013744",
+      "label": "LO.PVLP.1013 (FlyWire:720575940613821290)",
+      "kind": "neuron",
+      "class_label": "lobula plate-lobula columnar neuron LPLC2",
+      "class_id": "FBbt_00111763",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/fw01/3744/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/fw01/3744/VFB_00101567/thumbnail.png",
+      "color": [
+        1.0,
+        0.811,
+        0.15,
+        1.0
+      ],
+      "dataset": "FlyWire connectome neurons",
+      "license": "CC-BY-NC_4.0",
+      "description": "",
+      "file": "VFB_fw013744.glb",
+      "faces": 59999
+    },
+    {
+      "id": "VFB_00103vye",
+      "label": "LC11_R (JRC_OpticLobe:26574)",
+      "kind": "neuron",
+      "class_label": "lobula columnar neuron LC11",
+      "class_id": "FBbt_00100483",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/3vye/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/3vye/VFB_00101567/thumbnail.png",
+      "color": [
+        0.563,
+        0.15,
+        1.0,
+        1.0
+      ],
+      "dataset": "Optic Lobe connectome neurons from optic_lobe:v1.0.1, Nern et al., 2024",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_00103vye.glb",
+      "faces": 60541
+    },
+    {
+      "id": "VFB_00105fis",
+      "label": "BANC_888:720575941547810184",
+      "kind": "neuron",
+      "class_label": "lobula columnar neuron LC11",
+      "class_id": "FBbt_00100483",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/5fis/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/5fis/VFB_00101567/thumbnail.png",
+      "color": [
+        0.15,
+        1.0,
+        0.315,
+        1.0
+      ],
+      "dataset": "Brain and Nerve Cord (BANC) version 626 connectome neurons from Bates et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_00105fis.glb",
+      "faces": 59999
+    },
+    {
+      "id": "VFB_fw001311",
+      "label": "LOP.IPS.41 (FlyWire:720575940612296154)",
+      "kind": "neuron",
+      "class_label": "horizontal system neuron",
+      "class_id": "FBbt_00003917",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/fw00/1311/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/fw00/1311/VFB_00101567/thumbnail.png",
+      "color": [
+        1.0,
+        0.15,
+        0.233,
+        1.0
+      ],
+      "dataset": "FlyWire connectome neurons",
+      "license": "CC-BY-NC_4.0",
+      "description": "",
+      "file": "VFB_fw001311.glb",
+      "faces": 60000
+    },
+    {
+      "id": "VFB_fw001778",
+      "label": "LOP.IPS.38 (FlyWire:720575940617797259)",
+      "kind": "neuron",
+      "class_label": "horizontal system neuron",
+      "class_id": "FBbt_00003917",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/fw00/1778/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/fw00/1778/VFB_00101567/thumbnail.png",
+      "color": [
+        0.15,
+        0.481,
+        1.0,
+        1.0
+      ],
+      "dataset": "FlyWire connectome neurons",
+      "license": "CC-BY-NC_4.0",
+      "description": "",
+      "file": "VFB_fw001778.glb",
+      "faces": 59997
+    },
+    {
+      "id": "VFB_jrchk7ju",
+      "label": "VS(LPTC) (FlyEM-HB:1868255513)",
+      "kind": "neuron",
+      "class_label": "vertical system neuron",
+      "class_id": "FBbt_00007516",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/jrch/k7ju/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/jrch/k7ju/VFB_00101567/thumbnail.png",
+      "color": [
+        0.729,
+        1.0,
+        0.15,
+        1.0
+      ],
+      "dataset": "JRC_FlyEM_Hemibrain neurons Version 1.2.1",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_jrchk7ju.glb",
+      "faces": 60000
+    },
+    {
+      "id": "VFB_fw036980",
+      "label": "PVLP.31 (FlyWire:720575940632499757)",
+      "kind": "neuron",
+      "class_label": "giant fiber neuron",
+      "class_id": "FBbt_00004020",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/fw03/6980/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/fw03/6980/VFB_00101567/thumbnail.png",
+      "color": [
+        1.0,
+        0.15,
+        0.977,
+        1.0
+      ],
+      "dataset": "FlyWire connectome neurons",
+      "license": "CC-BY-NC_4.0",
+      "description": "",
+      "file": "VFB_fw036980.glb",
+      "faces": 60000
+    },
+    {
+      "id": "VFB_fw036981",
+      "label": "PVLP.44 (FlyWire:720575940622838154)",
+      "kind": "neuron",
+      "class_label": "giant fiber neuron",
+      "class_id": "FBbt_00004020",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/fw03/6981/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/fw03/6981/VFB_00101567/thumbnail.png",
+      "color": [
+        0.15,
+        1.0,
+        0.775,
+        1.0
+      ],
+      "dataset": "FlyWire connectome neurons",
+      "license": "CC-BY-NC_4.0",
+      "description": "",
+      "file": "VFB_fw036981.glb",
+      "faces": 59999
+    },
+    {
+      "id": "VFB_jrmc30ne",
+      "label": "DNp09_R (MaleCNS:11177)",
+      "kind": "neuron",
+      "class_label": "descending neuron of the posterior brain DNp09",
+      "class_id": "FBbt_00047642",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/jrmc/30ne/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/jrmc/30ne/VFB_00101567/thumbnail.png",
+      "color": [
+        1.0,
+        0.527,
+        0.15,
+        1.0
+      ],
+      "dataset": "Male CNS version 1.0 connectome neurons from Berg et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_jrmc30ne.glb",
+      "faces": 59999
+    },
+    {
+      "id": "VFB_00104xm7",
+      "label": "BANC_626:720575941633779387",
+      "kind": "neuron",
+      "class_label": "descending neuron of the posterior brain DNp09",
+      "class_id": "FBbt_00047642",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/4xm7/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/4xm7/VFB_00101567/thumbnail.png",
+      "color": [
+        0.279,
+        0.15,
+        1.0,
+        1.0
+      ],
+      "dataset": "Brain and Nerve Cord (BANC) version 626 connectome neurons from Bates et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_00104xm7.glb",
+      "faces": 59999
+    },
+    {
+      "id": "VFB_001061qy",
+      "label": "BANC_888:720575941491065653",
+      "kind": "neuron",
+      "class_label": "adult moonwalker descending neuron",
+      "class_id": "FBbt_00111308",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/61qy/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/61qy/VFB_00101567/thumbnail.png",
+      "color": [
+        0.269,
+        1.0,
+        0.15,
+        1.0
+      ],
+      "dataset": "Brain and Nerve Cord (BANC) version 888 connectome neurons from Bates et al. (2026).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_001061qy.glb",
+      "faces": 59999
+    },
+    {
+      "id": "VFB_jrmc20bu",
+      "label": "MDN_R (MaleCNS:10763)",
+      "kind": "neuron",
+      "class_label": "adult moonwalker descending neuron",
+      "class_id": "FBbt_00111308",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/jrmc/20bu/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/jrmc/20bu/VFB_00101567/thumbnail.png",
+      "color": [
+        1.0,
+        0.15,
+        0.517,
+        1.0
+      ],
+      "dataset": "Male CNS version 1.0 connectome neurons from Berg et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_jrmc20bu.glb",
+      "faces": 59999
+    },
+    {
+      "id": "VFB_001000q6",
+      "label": "KC#774-a'b' (FAFB:8956373)",
+      "kind": "neuron",
+      "class_label": "Kenyon cell",
+      "class_id": "FBbt_00003686",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/00q6/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/00q6/VFB_00101567/thumbnail.png",
+      "color": [
+        0.15,
+        0.765,
+        1.0,
+        1.0
+      ],
+      "dataset": "EM FAFB Zheng et al 2020 (published 2022)",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_001000q6.glb",
+      "faces": 60000
+    },
+    {
+      "id": "VFB_001000q2",
+      "label": "KC#770-a'b' (FAFB:8940379)",
+      "kind": "neuron",
+      "class_label": "Kenyon cell",
+      "class_id": "FBbt_00003686",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/00q2/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/00q2/VFB_00101567/thumbnail.png",
+      "color": [
+        1.0,
+        0.987,
+        0.15,
+        1.0
+      ],
+      "dataset": "EM FAFB Zheng et al 2020 (published 2022)",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_001000q2.glb",
+      "faces": 1926
+    },
+    {
+      "id": "VFB_001000ru",
+      "label": "KC#834-a'b' (FAFB:9215081)",
+      "kind": "neuron",
+      "class_label": "Kenyon cell",
+      "class_id": "FBbt_00003686",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/00ru/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/00ru/VFB_00101567/thumbnail.png",
+      "color": [
+        0.739,
+        0.15,
+        1.0,
+        1.0
+      ],
+      "dataset": "EM FAFB Zheng et al 2020 (published 2022)",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_001000ru.glb",
+      "faces": 60000
+    },
+    {
+      "id": "VFB_fw024742",
+      "label": "MB_ML.87 (FlyWire:720575940630794703)",
+      "kind": "neuron",
+      "class_label": "dopaminergic PAM neuron 15",
+      "class_id": "FBbt_00049841",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/fw02/4742/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/fw02/4742/VFB_00101567/thumbnail.png",
+      "color": [
+        0.15,
+        1.0,
+        0.491,
+        1.0
+      ],
+      "dataset": "FlyWire connectome neurons",
+      "license": "CC-BY-NC_4.0",
+      "description": "",
+      "file": "VFB_fw024742.glb",
+      "faces": 60000
+    },
+    {
+      "id": "VFB_jrmc1i21",
+      "label": "PAM15(y5B'2a)_R (MaleCNS:135290)",
+      "kind": "neuron",
+      "class_label": "dopaminergic PAM neuron 15",
+      "class_id": "FBbt_00049841",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/jrmc/1i21/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/jrmc/1i21/VFB_00101567/thumbnail.png",
+      "color": [
+        1.0,
+        0.243,
+        0.15,
+        1.0
+      ],
+      "dataset": "Male CNS version 1.0 connectome neurons from Berg et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_jrmc1i21.glb",
+      "faces": 59998
+    },
+    {
+      "id": "VFB_fw013772",
+      "label": "MB_ML.222 (FlyWire:720575940630816207)",
+      "kind": "neuron",
+      "class_label": "dopaminergic PAM neuron 15",
+      "class_id": "FBbt_00049841",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/fw01/3772/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/fw01/3772/VFB_00101567/thumbnail.png",
+      "color": [
+        0.15,
+        0.305,
+        1.0,
+        1.0
+      ],
+      "dataset": "FlyWire connectome neurons",
+      "license": "CC-BY-NC_4.0",
+      "description": "",
+      "file": "VFB_fw013772.glb",
+      "faces": 60000
+    },
+    {
+      "id": "VFB_jrchk45q",
+      "label": "PPL107_R (FlyEM-HB:859265651)",
+      "kind": "neuron",
+      "class_label": "dopaminergic PPL1 neuron",
+      "class_id": "FBbt_00100219",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/jrch/k45q/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/jrch/k45q/VFB_00101567/thumbnail.png",
+      "color": [
+        0.553,
+        1.0,
+        0.15,
+        1.0
+      ],
+      "dataset": "JRC_FlyEM_Hemibrain neurons Version 1.2.1",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_jrchk45q.glb",
+      "faces": 60000
+    },
+    {
+      "id": "VFB_00105t3k",
+      "label": "BANC_626:720575941515200323",
+      "kind": "neuron",
+      "class_label": "dopaminergic PPL1 neuron",
+      "class_id": "FBbt_00100219",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/5t3k/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/5t3k/VFB_00101567/thumbnail.png",
+      "color": [
+        1.0,
+        0.15,
+        0.801,
+        1.0
+      ],
+      "dataset": "Brain and Nerve Cord (BANC) version 626 connectome neurons from Bates et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_00105t3k.glb",
+      "faces": 59998
+    },
+    {
+      "id": "VFB_jrmc1j6a",
+      "label": "PPL107_R (MaleCNS:14705)",
+      "kind": "neuron",
+      "class_label": "dopaminergic PPL1 neuron",
+      "class_id": "FBbt_00100219",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/jrmc/1j6a/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/jrmc/1j6a/VFB_00101567/thumbnail.png",
+      "color": [
+        0.15,
+        1.0,
+        0.951,
+        1.0
+      ],
+      "dataset": "Male CNS version 0.9 connectome neurons from Berg et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_jrmc1j6a.glb",
+      "faces": 59997
+    },
+    {
+      "id": "VFB_fw000169",
+      "label": "EB.FB.1 (FlyWire:720575940636455280)",
+      "kind": "neuron",
+      "class_label": "adult ellipsoid body ring neuron",
+      "class_id": "FBbt_00003649",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/fw00/0169/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/fw00/0169/VFB_00101567/thumbnail.png",
+      "color": [
+        1.0,
+        0.703,
+        0.15,
+        1.0
+      ],
+      "dataset": "FlyWire connectome neurons",
+      "license": "CC-BY-NC_4.0",
+      "description": "",
+      "file": "VFB_fw000169.glb",
+      "faces": 59999
+    },
+    {
+      "id": "VFB_fw036190",
+      "label": "EB.FB.4 (FlyWire:720575940632742099)",
+      "kind": "neuron",
+      "class_label": "adult ellipsoid body ring neuron",
+      "class_id": "FBbt_00003649",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/fw03/6190/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/fw03/6190/VFB_00101567/thumbnail.png",
+      "color": [
+        0.455,
+        0.15,
+        1.0,
+        1.0
+      ],
+      "dataset": "FlyWire connectome neurons",
+      "license": "CC-BY-NC_4.0",
+      "description": "",
+      "file": "VFB_fw036190.glb",
+      "faces": 59999
+    },
+    {
+      "id": "VFB_fw029979",
+      "label": "SLP.AVLP.4 (FlyWire:720575940635549620)",
+      "kind": "neuron",
+      "class_label": "NPF neuron",
+      "class_id": "FBbt_00053266",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/fw02/9979/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/fw02/9979/VFB_00101567/thumbnail.png",
+      "color": [
+        0.15,
+        1.0,
+        0.207,
+        1.0
+      ],
+      "dataset": "FlyWire connectome neurons",
+      "license": "CC-BY-NC_4.0",
+      "description": "",
+      "file": "VFB_fw029979.glb",
+      "faces": 59999
+    },
+    {
+      "id": "VFB_jrmc30p2",
+      "label": "DNp29(NPFP1)_R (MaleCNS:10195)",
+      "kind": "neuron",
+      "class_label": "NPF neuron",
+      "class_id": "FBbt_00053266",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/jrmc/30p2/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/jrmc/30p2/VFB_00101567/thumbnail.png",
+      "color": [
+        1.0,
+        0.15,
+        0.341,
+        1.0
+      ],
+      "dataset": "Male CNS version 1.0 connectome neurons from Berg et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_jrmc30p2.glb",
+      "faces": 59999
+    },
+    {
+      "id": "VFB_00105yk4",
+      "label": "BANC_626:720575941507288855",
+      "kind": "neuron",
+      "class_label": "octopaminergic neuron",
+      "class_id": "FBbt_00007364",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/0010/5yk4/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/0010/5yk4/VFB_00101567/thumbnail.png",
+      "color": [
+        0.15,
+        0.59,
+        1.0,
+        1.0
+      ],
+      "dataset": "Brain and Nerve Cord (BANC) version 626 connectome neurons from Bates et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_00105yk4.glb",
+      "faces": 60000
+    },
+    {
+      "id": "VFB_jrmc1nfv",
+      "label": "OA-VPM3_L (MaleCNS:287884)",
+      "kind": "neuron",
+      "class_label": "octopaminergic neuron",
+      "class_id": "FBbt_00007364",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/jrmc/1nfv/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/jrmc/1nfv/VFB_00101567/thumbnail.png",
+      "color": [
+        0.838,
+        1.0,
+        0.15,
+        1.0
+      ],
+      "dataset": "Male CNS version 0.9 connectome neurons from Berg et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_jrmc1nfv.glb",
+      "faces": 60000
+    },
+    {
+      "id": "VFB_jrmc2hoa",
+      "label": "JO-unclear_R (MaleCNS:675422459)",
+      "kind": "neuron",
+      "class_label": "Johnston organ neuron",
+      "class_id": "FBbt_00100000",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/jrmc/2hoa/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/jrmc/2hoa/VFB_00101567/thumbnail.png",
+      "color": [
+        0.914,
+        0.15,
+        1.0,
+        1.0
+      ],
+      "dataset": "Male CNS version 0.9 connectome neurons from Berg et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_jrmc2hoa.glb",
+      "faces": 7651
+    },
+    {
+      "id": "VFB_jrmc2hns",
+      "label": "JO-unclear_R (MaleCNS:333565)",
+      "kind": "neuron",
+      "class_label": "Johnston organ neuron",
+      "class_id": "FBbt_00100000",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/jrmc/2hns/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/jrmc/2hns/VFB_00101567/thumbnail.png",
+      "color": [
+        0.15,
+        1.0,
+        0.666,
+        1.0
+      ],
+      "dataset": "Male CNS version 1.0 connectome neurons from Berg et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_jrmc2hns.glb",
+      "faces": 23398
+    },
+    {
+      "id": "VFB_fw036900",
+      "label": "GNG.1504 (FlyWire:720575940641811419)",
+      "kind": "neuron",
+      "class_label": "adult descending neuron",
+      "class_id": "FBbt_00047511",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/fw03/6900/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/fw03/6900/VFB_00101567/thumbnail.png",
+      "color": [
+        1.0,
+        0.418,
+        0.15,
+        1.0
+      ],
+      "dataset": "FlyWire connectome neurons",
+      "license": "CC-BY-NC_4.0",
+      "description": "",
+      "file": "VFB_fw036900.glb",
+      "faces": 60000
+    },
+    {
+      "id": "VFB_fw000517",
+      "label": "GNG.1420 (FlyWire:720575940624342569)",
+      "kind": "neuron",
+      "class_label": "adult descending neuron",
+      "class_id": "FBbt_00047511",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/fw00/0517/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/fw00/0517/VFB_00101567/thumbnail.png",
+      "color": [
+        0.17,
+        0.15,
+        1.0,
+        1.0
+      ],
+      "dataset": "FlyWire connectome neurons",
+      "license": "CC-BY-NC_4.0",
+      "description": "",
+      "file": "VFB_fw000517.glb",
+      "faces": 59999
+    },
+    {
+      "id": "VFB_jrmc3kjh",
+      "label": "None (MaleCNS:11851)",
+      "kind": "neuron",
+      "class_label": "adult descending neuron",
+      "class_id": "FBbt_00047511",
+      "template": "VFB_00101567",
+      "source_url": "http://www.virtualflybrain.org/data/VFB/i/jrmc/3kjh/VFB_00101567/volume_man.obj",
+      "format": "obj",
+      "thumbnail": "http://www.virtualflybrain.org/data/VFB/i/jrmc/3kjh/VFB_00101567/thumbnail.png",
+      "color": [
+        0.378,
+        1.0,
+        0.15,
+        1.0
+      ],
+      "dataset": "Male CNS version 1.0 connectome neurons from Berg et al. (2025).",
+      "license": "CC-BY_4.0",
+      "description": "",
+      "file": "VFB_jrmc3kjh.glb",
+      "faces": 59999
+    }
+  ],
+  "errors": []
+}
