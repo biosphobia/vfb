@@ -76,7 +76,7 @@ export class Brain {
         let geom = null; gltf.scene.traverse((m) => { if (!geom && m.isMesh) geom = m.geometry; });
         if (!geom) continue;
         const c = o.color || [0.8, 0.8, 0.8, 1];
-        this.add(o.id, o.label || o.id, o.kind || 'neuron', geom, new THREE.Color(c[0], c[1], c[2]), { format: o.format || 'glb', bundled: true });
+        this.add(o.id, o.label || o.id, o.kind || 'neuron', geom, new THREE.Color(c[0], c[1], c[2]), { format: o.format || 'glb', bundled: true, classLabel: o.class_label || '', classId: o.class_id || '' });
         n++; onEach && onEach(n, objs.length, o);
       } catch (e) { console.warn('bundled object failed', o.id, e); }
     }

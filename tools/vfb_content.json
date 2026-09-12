@@ -20,8 +20,13 @@
       "max_instances": 2
     },
     {
-      "label": "lobula plate lobula columnar neuron LPLC2",
-      "max_instances": 2
+      "max_instances": 2,
+      "labels": [
+        "lobula plate-lobula columnar neuron LPLC2",
+        "LPLC2 neuron",
+        "lobula plate lobula columnar neuron LPLC2",
+        "LPLC2"
+      ]
     },
     {
       "label": "lobula columnar neuron LC11",
@@ -40,12 +45,22 @@
       "max_instances": 2
     },
     {
-      "label": "descending neuron DNa02",
-      "max_instances": 2
+      "max_instances": 2,
+      "labels": [
+        "adult descending neuron DNa02",
+        "DNa02 neuron",
+        "descending neuron DNa02",
+        "DNa02"
+      ]
     },
     {
-      "label": "descending neuron DNp09",
-      "max_instances": 2
+      "max_instances": 2,
+      "labels": [
+        "adult descending neuron DNp09",
+        "DNp09 neuron",
+        "descending neuron DNp09",
+        "DNp09"
+      ]
     },
     {
       "label": "moonwalker descending neuron",
@@ -60,28 +75,54 @@
       "max_instances": 3
     },
     {
-      "label": "PAM dopaminergic neuron",
-      "max_instances": 3
+      "max_instances": 3,
+      "labels": [
+        "adult PAM dopaminergic neuron",
+        "PAM dopaminergic neuron",
+        "PAM neuron",
+        "protocerebral anterior medial dopaminergic neuron"
+      ]
     },
     {
-      "label": "PPL1 dopaminergic neuron",
-      "max_instances": 3
+      "max_instances": 3,
+      "labels": [
+        "adult PPL1 dopaminergic neuron",
+        "PPL1 dopaminergic neuron",
+        "PPL1 neuron",
+        "protocerebral posterior lateral 1 dopaminergic neuron"
+      ]
     },
     {
-      "label": "dorsal fan-shaped body neuron",
-      "max_instances": 2
+      "max_instances": 2,
+      "labels": [
+        "adult dorsal fan-shaped body neuron",
+        "dorsal fan-shaped body neuron",
+        "fan-shaped body neuron",
+        "adult fan-shaped body neuron"
+      ]
     },
     {
       "label": "ellipsoid body ring neuron",
       "max_instances": 2
     },
     {
-      "label": "sugar-sensing gustatory receptor neuron",
-      "max_instances": 2
+      "max_instances": 2,
+      "labels": [
+        "adult sugar-sensing gustatory receptor neuron",
+        "sweet gustatory receptor neuron",
+        "Gr5a gustatory receptor neuron",
+        "Gr5a neuron",
+        "gustatory receptor neuron"
+      ]
     },
     {
-      "label": "bitter-sensing gustatory receptor neuron",
-      "max_instances": 2
+      "max_instances": 2,
+      "labels": [
+        "adult bitter-sensing gustatory receptor neuron",
+        "bitter gustatory receptor neuron",
+        "Gr66a gustatory receptor neuron",
+        "Gr66a neuron"
+      ]
     },
     {
       "label": "NPF neuron",
@@ -92,8 +133,13 @@
       "max_instances": 2
     },
     {
-      "label": "Johnston's organ neuron",
-      "max_instances": 2
+      "max_instances": 2,
+      "labels": [
+        "Johnston organ neuron",
+        "Johnston's organ neuron",
+        "adult Johnston organ neuron",
+        "JO neuron"
+      ]
     },
     {
       "label": "adult descending neuron",

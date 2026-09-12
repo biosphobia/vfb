@@ -231,15 +231,23 @@ def main() -> None:
     for spec in cfg.get("neuron_classes", []):
         if args.limit and len(objects) >= args.limit:
             break
-        label = spec["label"]
-        cid = spec.get("id") or f.resolve_label(label)
+        label = spec.get("label") or (spec.get("labels") or [""])[0]
+        candidates = [spec["label"]] if spec.get("label") else []
+        candidates += [c for c in spec.get("labels", []) if c not in candidates]
+        cid = spec.get("id")
+        for cand in candidates:
+            if cid:
+                break
+            cid = f.resolve_label(cand)
         if not cid:
-            f.log(f"class '{label}': could not resolve id")
+            f.log(f"class '{label}': could not resolve id (tried {candidates})")
             continue
         info = f.term_info(cid)
         if not info:
             f.log(f"class '{label}' ({cid}): no term info")
             continue
+        true_label = (info.get("term", {}).get("core", {}) or {}).get("label") or label
+        label = true_label  # record the class VFB actually resolved, never the requested text
         examples = info.get("anatomy_channel_image") or []
         f.log(f"class '{label}' ({cid}): {len(examples)} example images")
         n = 0
@@ -253,14 +261,14 @@ def main() -> None:
             nid = anat.get("short_form")
             if not nid or nid in meshes:
                 continue
-            neuron_specs.append((nid, label, 0))
+            neuron_specs.append((nid, label, cid))
             n += 1
             if n >= int(spec.get("max_instances", 5)):
                 break
     for nid in cfg.get("neuron_ids", []):
         neuron_specs.append((nid, None, 0))
 
-    for k, (nid, class_label, _) in enumerate(neuron_specs):
+    for k, (nid, class_label, class_id) in enumerate(neuron_specs):
         if args.limit and len(objects) >= args.limit:
             break
         info = f.term_info(nid)
@@ -294,7 +302,7 @@ def main() -> None:
         meshes[nid] = mesh
         ds = (info.get("dataset_license") or [{}])[0] if info.get("dataset_license") else {}
         objects.append({
-            "id": nid, "label": label, "kind": "neuron", "class_label": class_label,
+            "id": nid, "label": label, "kind": "neuron", "class_label": class_label, "class_id": class_id or None,
             "template": template_id, "source_url": src, "format": fmt,
             "thumbnail": urls.get("thumbnail"), "color": pick_color(100 + k, "neuron"),
             "dataset": ((ds.get("dataset") or {}).get("core") or {}).get("label"),
