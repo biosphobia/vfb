@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<meta name="description" content="Explore a fruit fly's real brain map inside a walking, flying 3D fly. Show it a video and watch how it reacts.">
+<meta name="description" content="A fruit fly whose behaviour and internal states are computed by a circuit model of its real brain map. Show it what you see and watch its neurons respond.">
 <meta name="theme-color" content="#12151c">
 <title>VFB Fly Explorer</title>
 <link rel="stylesheet" href="styles.css">
@@ -12,10 +12,7 @@
 {"imports": {"three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/"}}
 </script>
 <script>
-window.VFB_CONFIG = {
-  apiBase: new URLSearchParams(location.search).get('api') || 'https://vfb-fly-explorer-api.onrender.com',
-  dataBase: 'data/'
-};
+window.VFB_CONFIG = { apiBase: new URLSearchParams(location.search).get('api') || 'https://vfb-fly-explorer-api.onrender.com', dataBase: 'data/' };
 </script>
 </head>
 <body>
@@ -29,18 +26,17 @@ window.VFB_CONFIG = {
     <span id="status"></span>
   </header>
 
-  <div id="pip" title="Tap to look at the brain up close">
-    <span class="pip-label">Live brain view</span>
-  </div>
+  <div id="pip" title="Tap to look at the brain up close"><span class="pip-label">Live brain</span></div>
 
   <aside id="left" class="panel"></aside>
 
   <section id="panel" class="panel">
     <nav id="tabs">
       <button data-tab="fly">The fly</button>
-      <button data-tab="feelings">Feelings</button>
+      <button data-tab="states">States</button>
+      <button data-tab="eyes">Eyes</button>
       <button data-tab="brain">Brain part</button>
-      <button data-tab="watch">Watch</button>
+      <button data-tab="science">Science</button>
       <button data-tab="explore" class="mobile-only">Explore</button>
       <button data-tab="more">More</button>
     </nav>
@@ -49,33 +45,47 @@ window.VFB_CONFIG = {
 
       <div class="tab" id="tab-fly">
         <h3>What the fly is doing</h3><p id="doing">Waking up…</p>
-        <h3>How it feels</h3><p id="feeling"></p>
-        <h3>Paying attention to</h3><p id="focus"></p>
-        <h3>Brain activity right now</h3>
-        <p class="hint">Which parts of the brain are busiest. Illustrative, based on what the fly is doing.</p>
+        <h3>Why (active pathway)</h3><div id="pathways" class="pathways"></div>
+        <h3>Strongest internal state</h3><p id="feeling"></p>
+        <h3>Live neural monitor</h3>
+        <p class="hint">Population firing rates over the last 10 seconds, computed by the circuit model from what the fly sees, touches and tastes.</p>
+        <canvas id="monitor" width="640" height="200"></canvas>
+        <div id="monitor-legend" class="legend"></div>
         <div id="meters"></div>
-        <div class="row between"><h3>Story so far</h3><label id="ai-toggle" hidden><input type="checkbox" id="ai-check" checked> Richer story (AI)</label></div>
+        <div class="row between"><h3>Story so far</h3><label id="ai-toggle" hidden><input type="checkbox" id="ai-check" checked> Rephrase with AI</label></div>
         <div id="story"></div>
       </div>
 
-      <div class="tab" id="tab-feelings">
-        <h3>How the fly feels</h3>
-        <p class="hint">A model of the drives and feelings a fruit fly can have. They rise and fall with what happens to it: pokes hurt, food pleases, danger frightens, flying tires it out.</p>
+      <div class="tab" id="tab-states">
+        <h3>Internal states</h3>
+        <p class="hint">Not guesses: each gauge is the level of a state variable in the circuit model, updated only by sensory input and time. Each has an identified circuit in fruit-fly neuroscience (tap a gauge for the reference).</p>
         <div id="dominant" class="dominant"></div>
         <div id="gauges"></div>
-        <p class="hint" id="feelings-note"></p>
+        <p class="hint">Fruit flies do not have human emotions. These are the measurable internal states that change their behaviour, named as the literature names them.</p>
       </div>
 
-      <div class="tab" id="tab-brain">
-        <h2 id="part-title">Tap a glowing part of the brain</h2>
-        <img id="part-thumb" alt="" hidden>
-        <button id="part-load" class="primary" hidden>Show it inside the fly</button>
-        <div id="part-text">Every glowing shape inside the head is a real brain region or neuron from <a href="https://virtualflybrain.org" target="_blank" rel="noopener">Virtual Fly Brain</a>, mapped by scientists.<br><br>Tap one to read what it does. Use <b>Explore</b> to find more.</div>
-      </div>
-
-      <div class="tab" id="tab-watch">
-        <h3>Show the fly a video</h3>
-        <p class="hint">Paste a YouTube link. It plays on a screen in front of the fly, and the fly reacts to what it sees.</p>
+      <div class="tab" id="tab-eyes">
+        <h3>What the fly sees</h3>
+        <p class="hint">The fly's eyes only respond to pixels this page is allowed to read. Choose an input; its frames go straight into the photoreceptor model at the same moment you see them.</p>
+        <p id="eye-status" class="strong">Eyes: nothing in view.</p>
+        <div class="row wrap">
+          <button id="src-share" class="primary" title="Share the tab or window playing your video (PC browsers)">Share screen / tab</button>
+          <button id="src-camera">Use camera</button>
+          <label class="filebtn"><input type="file" id="src-file" accept="video/*"> Video file</label>
+          <button id="src-stop">Stop input</button>
+        </div>
+        <h3>Lab stimuli on the fly's screen</h3>
+        <p class="hint">Classic stimuli used in fly experiments. Watch the pathway light up and the fly respond.</p>
+        <div class="row wrap">
+          <button data-stim="loom">Looming disc</button>
+          <button data-stim="grating-l">Grating ←</button>
+          <button data-stim="grating-r">Grating →</button>
+          <button data-stim="object">Moving bar</button>
+          <button data-stim="flicker">Flicker</button>
+          <button data-stim="blank">Blank</button>
+        </div>
+        <h3>YouTube on the screen</h3>
+        <p class="hint">Plays on the screen for you. Browsers do not let the page read a YouTube player's pixels, so the fly cannot see it until you <b>Share this tab</b> (PC). On phones use the camera or a video file.</p>
         <form id="link-form" autocomplete="off" class="row">
           <input id="link-input" type="url" inputmode="url" enterkeyhint="go" placeholder="Paste a YouTube link" aria-label="YouTube link">
           <button type="button" id="link-paste">Paste</button>
@@ -86,18 +96,34 @@ window.VFB_CONFIG = {
           <div class="row wrap">
             <button id="video-play">Pause</button>
             <button id="video-mute">Unmute</button>
-            <button id="video-eye">Fly's eye view</button>
-            <button id="video-share">Copy share link</button>
-            <button id="video-stop">Stop</button>
+            <button id="video-share">Copy link</button>
+            <button id="video-stop">Stop video</button>
           </div>
-          <p id="video-summary"></p>
-          <div id="video-notes"></div>
         </div>
+        <div class="row wrap"><button id="open-eye" class="primary">Fly's eye view</button></div>
+      </div>
+
+      <div class="tab" id="tab-brain">
+        <h2 id="part-title">Tap a glowing part of the brain</h2>
+        <p id="part-model" class="hint"></p>
+        <img id="part-thumb" alt="" hidden>
+        <button id="part-load" class="primary" hidden>Show it inside the fly</button>
+        <div id="part-text">Every glowing shape inside the head is a real brain region or neuron from <a href="https://virtualflybrain.org" target="_blank" rel="noopener">Virtual Fly Brain</a>. Its glow is the firing rate of the model population that lives there.</div>
+      </div>
+
+      <div class="tab" id="tab-science">
+        <h3>How this works</h3>
+        <p class="hint">Sensory input → identified neuron populations → descending neurons → body. Nothing is inferred from text or titles. The model is rate-based and simplified, but every link below is a published pathway. Live values update as you watch.</p>
+        <div id="circuits"></div>
+        <h3>Internal states and their circuits</h3>
+        <div id="state-refs"></div>
+        <h3>Limits</h3>
+        <p class="hint">This is a mechanistic sketch, not the 140,000-neuron connectome simulation. Populations are lumped, rates are normalised, and constants are tuned to reproduce the published behaviours (optomotor turning, looming escape, fixation, PER, sleep homeostasis). Colour vision, olfaction, courtship and aggression circuits are not modelled yet.</p>
       </div>
 
       <div class="tab" id="tab-explore">
         <h3>Find a brain part</h3>
-        <p class="hint">Type a name like “mushroom body”, “antennal lobe” or a neuron type.</p>
+        <p class="hint">Type a name like “mushroom body”, “giant fiber” or “LPLC2”.</p>
         <form id="search-form" autocomplete="off" class="row">
           <input id="search-input" type="search" placeholder="e.g. mushroom body" enterkeyhint="search">
           <button type="submit" class="primary">Search</button>
@@ -117,8 +143,8 @@ window.VFB_CONFIG = {
           <label><input type="checkbox" id="opt-follow" checked> Camera follows fly</label>
         </div>
         <div class="row wrap"><button id="focus-brain">Look at brain</button><button id="focus-fly">Look at fly</button><button id="focus-screen">Look at screen</button><button id="show-tips">Show tips</button></div>
-        <h3>Walking</h3>
-        <div class="row"><label>Speed <input type="range" id="opt-hz" min="0.5" max="8" step="0.1" value="2.5"></label><label>Step size <input type="range" id="opt-stride" min="5" max="40" step="1" value="20"></label></div>
+        <h3>Animation</h3>
+        <div class="row"><label>Step rate <input type="range" id="opt-hz" min="0.5" max="8" step="0.1" value="2.5"></label><label>Step size <input type="range" id="opt-stride" min="5" max="40" step="1" value="20"></label></div>
         <h3>Advanced: brain position in the head</h3>
         <p class="hint">The brain map is placed in the head by estimate. Nudge it here (millimetres) if it looks off.</p>
         <div class="row wrap">
@@ -128,73 +154,67 @@ window.VFB_CONFIG = {
           <label>size <input type="number" id="cal-s" step="0.05" value="1" min="0.1" max="5"></label>
         </div>
         <h3>About</h3>
-        <p class="hint">Body: <a href="https://github.com/NeLy-EPFL/flygym" target="_blank" rel="noopener">NeuroMechFly</a> (EPFL, Apache-2.0). Brain: <a href="https://virtualflybrain.org" target="_blank" rel="noopener">Virtual Fly Brain</a>. Behaviour, feelings and the brain-activity glow are illustrative models, not measurements. Code: <a href="https://github.com/biosphobia/vfb" target="_blank" rel="noopener">github.com/biosphobia/vfb</a>.</p>
+        <p class="hint">Body: <a href="https://github.com/NeLy-EPFL/flygym" target="_blank" rel="noopener">NeuroMechFly</a> (EPFL, Apache-2.0). Brain: <a href="https://virtualflybrain.org" target="_blank" rel="noopener">Virtual Fly Brain</a>. Circuit model: see the Science tab. Code: <a href="https://github.com/biosphobia/vfb" target="_blank" rel="noopener">github.com/biosphobia/vfb</a>.</p>
       </div>
 
     </div>
   </section>
 
   <footer id="bottombar">
-    <div class="group">
-      <button data-behaviour="idle" class="beh">Rest</button>
-      <button data-behaviour="walk" class="beh">Walk</button>
-      <button data-behaviour="fly" class="beh">Fly</button>
-      <button id="poke">Poke</button>
+    <div class="group" title="Stimuli (sensory input)">
+      <button id="poke">Light touch</button>
+      <button id="poke-harsh">Harsh poke</button>
+      <button id="sugar">Sugar</button>
+      <button id="bitter">Bitter</button>
+    </div>
+    <div class="group" title="Optogenetic activation (switch neurons on directly)">
+      <button data-opto="walk" class="opto">Activate DNp09 (walk)</button>
+      <button data-opto="gf" class="opto">Giant fiber</button>
+      <button data-opto="dfb" class="opto">dFB (sleep)</button>
     </div>
     <div class="group">
       <button id="bb-brain">Look at brain</button>
-      <button id="bb-fly">Look at fly</button>
+      <button id="bb-screen">Look at screen</button>
       <button id="bb-xray">See-through</button>
-      <button id="bb-explore">Explore…</button>
     </div>
-    <span class="hint">W A S D walk · Space fly · drag to orbit · wheel to zoom · click a brain part</span>
+    <span class="hint">W A S D steer (optogenetic) · drag to orbit · wheel to zoom · click a brain part</span>
   </footer>
 
   <nav id="mobilebar">
     <button data-tab="fly">The fly</button>
-    <button data-tab="feelings">Feelings</button>
+    <button data-tab="states">States</button>
+    <button data-tab="eyes">Eyes</button>
     <button data-tab="brain">Brain</button>
-    <button data-tab="watch">Watch</button>
     <button data-tab="explore">Explore</button>
     <button data-tab="more">More</button>
   </nav>
-  <div id="joystick"><div class="knob"></div></div>
+  <div id="joystick" title="Optogenetic steering"><div class="knob"></div></div>
   <div id="actions">
-    <button data-behaviour="fly" class="beh">Fly</button>
-    <button data-behaviour="walk" class="beh">Walk</button>
-    <button data-behaviour="idle" class="beh">Rest</button>
-    <button id="poke-m">Poke</button>
+    <button id="poke-m">Touch</button>
+    <button id="sugar-m">Sugar</button>
+    <button id="loom-m">Loom</button>
+    <button data-opto="walk" class="opto">Walk</button>
   </div>
 
   <div id="welcome-blocker"></div>
   <div id="welcome" class="panel">
     <h2>Meet the fly</h2>
-    <p>This is a fruit fly with its <b>real brain map</b> inside its head, built from scientists' data at Virtual Fly Brain.</p>
+    <p>A fruit fly with its <b>real brain map</b> inside its head (Virtual Fly Brain). Everything it does is computed by a circuit model of named neurons: what its eyes see, what it touches and tastes, and its own internal states.</p>
     <ul>
-      <li><b>Tap a glowing part</b> of the brain to learn what it does.</li>
-      <li><b>Walk it around</b> with the joystick or W A S D, make it fly, poke it.</li>
-      <li><b>Show it a YouTube video</b> on the screen in front of it and watch how it reacts.</li>
-      <li>Follow its <b>feelings</b> and the live story of what it is doing.</li>
+      <li><b>Show it something</b>: share your screen, use your camera, or run a lab stimulus. Its neurons respond live.</li>
+      <li><b>Poke it, feed it</b>: watch nociceptors, sugar neurons and dopamine react.</li>
+      <li><b>Tap a glowing brain part</b> to learn what it is and which population it belongs to.</li>
+      <li>Follow its <b>internal states</b> and the live neural monitor.</li>
     </ul>
-    <button id="welcome-start" class="primary big">Start exploring</button>
+    <button id="welcome-start" class="primary big">Start</button>
   </div>
 </div>
 
 <div id="flyeye" hidden>
-  <div id="eye-player"></div>
-  <svg id="eye-mosaic" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-    <defs>
-      <pattern id="hex" width="28" height="48.5" patternUnits="userSpaceOnUse" patternTransform="scale(1.4)">
-        <path d="M14 0 L28 8.08 L28 24.25 L14 32.33 L0 24.25 L0 8.08 Z M14 32.33 L28 40.4 L28 56.6 M14 32.33 L0 40.4" fill="none" stroke="rgba(0,0,0,0.55)" stroke-width="1.4"/>
-      </pattern>
-      <radialGradient id="vig" cx="50%" cy="50%" r="70%"><stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.9)"/></radialGradient>
-    </defs>
-    <rect width="100%" height="100%" fill="url(#hex)"/>
-    <rect width="100%" height="100%" fill="url(#vig)"/>
-  </svg>
+  <canvas id="eye-canvas"></canvas>
   <div id="eye-hud">
     <div class="eye-title">Fly's eye view</div>
-    <div class="eye-sub">This is all the fly sees: the video, beamed straight into its optic lobes through ~800 lenses per eye.</div>
+    <div class="eye-sub">Each cell is one sampled ommatidium: the luminance its photoreceptors receive right now. Arrows are the T4/T5 motion signals. Red flash = giant fiber.</div>
     <div id="eye-meters"></div>
     <button id="eye-close" class="primary">Back to the fly</button>
   </div>

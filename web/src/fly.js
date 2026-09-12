@@ -62,7 +62,7 @@ export class FlyRig {
     this.forwardSpeed = 0; this.turnRate = 0; this.hover = 0;
     this.lookYawDeg = 0; this.lookPitchDeg = 0;
     this._t = 0; this._walk = 0; this._fly = 0; this._phase = 0; this._flap = 0;
-    this._drive = 0; this._turn = 0; this._hold = 0;
+    this._drive = 0; this._turn = 0; this._hold = 0; this._flightDrive = 0; this._groom = 0; this._freeze = false;
     this._startle = 0; this._rWalk = 0; this._rAnt = 0; this._rThink = 0; this._rFeed = 0; this._rGroove = 0; this._rest = 0;
     this._lookYaw = 0; this._lookPitch = 0;
     const lf = this.legs.lf || {}; const probes = lf.probes || {}; const sd = lf.sweep_dof || 'coxa.roll';
@@ -71,10 +71,18 @@ export class FlyRig {
     this._q = new THREE.Quaternion(); this._q2 = new THREE.Quaternion();
   }
   get jointCount() { return this.joints.size; }
-  setBehaviour(b) { if (b !== this.behaviour) { this.behaviour = b; this.onBehaviour && this.onBehaviour(b); } }
-  drive(fwd, turn) {
-    this._drive = THREE.MathUtils.clamp(fwd, -1, 1); this._turn = THREE.MathUtils.clamp(turn, -1, 1);
-    if (Math.abs(this._drive) > 0.01 || Math.abs(this._turn) > 0.01) this._hold = 0.35;
+  /** Drive the body from the brain model's descending-neuron readout. */
+  applyMotor(out) {
+    this._drive = THREE.MathUtils.clamp(out.forward, -1, 1);
+    this._turn = THREE.MathUtils.clamp(out.turn, -1, 1);
+    this._hold = Math.abs(this._drive) > 0.04 || Math.abs(this._turn) > 0.04 ? 0.35 : this._hold;
+    if (out.escape) this._startle = 1.4;
+    this._flightDrive = out.flight;
+    this._rFeed = out.feed > 0.25 ? Math.max(this._rFeed, 0.6) : this._rFeed;
+    this._rest = out.quiescence;
+    this._groom = out.groom;
+    this._freeze = !!out.freeze;
+    this.behaviour = out.escape || this._startle > 0.6 || out.flight > 0.5 ? 'fly' : (this._hold > 0 ? 'walk' : 'idle');
   }
   startle() { this._startle = 1.4; }
   react(kind, sec = 4) {
@@ -104,16 +112,16 @@ export class FlyRig {
     this._lookYaw += (this.lookYawDeg - this._lookYaw) * Math.min(1, dt * 3);
     this._lookPitch += (this.lookPitchDeg - this._lookPitch) * Math.min(1, dt * 3);
 
-    const moving = this._hold > 0;
-    const wantWalk = this.behaviour === 'walk' || (this.behaviour === 'idle' && (moving || this._rWalk > 0));
-    const wantFly = this.behaviour === 'fly' || this._startle > 0;
+    const moving = this._hold > 0 && !this._freeze;
+    const wantWalk = moving || this._rWalk > 0;
+    const wantFly = this._flightDrive > 0.5 || this._startle > 0;
     const to = (v, goal, rate) => v + THREE.MathUtils.clamp(goal - v, -rate * dt, rate * dt);
     this._walk = to(this._walk, wantWalk && !wantFly ? 1 : 0, 3);
     this._fly = to(this._fly, wantFly ? 1 : 0, 2.5);
     const gait = moving ? this.stepHz * (1 + 0.6 * Math.abs(this._drive)) : this.stepHz;
     this._phase = (this._phase + Math.PI * 2 * gait * dt * this._walk) % (Math.PI * 2);
     this._flap = (this._flap + Math.PI * 2 * this.flapHz * dt * this._fly) % (Math.PI * 2);
-    const dir = moving ? this._drive : ((this.behaviour === 'walk' || this._rWalk > 0) ? 1 : 0);
+    const dir = moving ? this._drive : (this._rWalk > 0 ? 1 : 0);
     this.forwardSpeed = this.strideMm * gait * dir * this._walk + 6 * this._drive * this._fly;
     this.turnRate = this._turn * 1.6 * Math.max(this._walk, this._fly);
     this.hover = 1.2 * this._fly + 0.12 * Math.sin(this._flap) * this._fly;
@@ -122,7 +130,7 @@ export class FlyRig {
     const acc = (node, dof, deg) => { let a = pose.get(node); if (!a) { a = [0, 0, 0]; pose.set(node, a); } a[dof === 'yaw' ? 0 : dof === 'pitch' ? 1 : 2] += deg; };
     const accDof = (leg, spec, deg) => { const [seg, ax] = spec.split('.'); acc(`${leg}_${seg}`, ax, deg); };
     // ---- idle
-    const k = this.idleAmount * (1 + 3 * Math.min(1, this._rAnt)) * (1 - 0.7 * this._rest);
+    const k = this.idleAmount * (1 + 3 * Math.min(1, this._rAnt)) * (1 - 0.7 * this._rest) * (this._freeze ? 0.15 : 1);
     acc('c_head', 'roll', this._lookYaw); acc('c_head', 'pitch', this._lookPitch);
     if (this._rThink > 0) { acc('c_head', 'pitch', Math.sin(this._t * 6) * 5); acc('c_rostrum', 'pitch', 12 * Math.min(1, this._rThink)); acc('c_haustellum', 'pitch', 10 * Math.min(1, this._rThink)); }
     if (this._rFeed > 0) { const e = Math.min(1, this._rFeed); acc('c_rostrum', 'pitch', 35 * e + Math.sin(this._t * 4) * 6 * e); acc('c_haustellum', 'pitch', 30 * e); acc('c_head', 'pitch', 10 * e); }
@@ -131,6 +139,13 @@ export class FlyRig {
       acc('c_head', 'pitch', Math.sin(bpm) * 9 * g); acc('c_head', 'roll', Math.sin(bpm * 0.5) * 8 * g); acc('c_abdomen12', 'pitch', Math.sin(bpm) * 5 * g);
       for (const w in this.wings) { const m = this.wings[w]; acc(w, m.flap_dof || 'yaw', Math.max(0, Math.sin(bpm * 2)) * 18 * g * (m.flap_sign_up || 1)); }
     }
+    if (this._groom > 0.05) {
+      // front-leg grooming: legs rub over the head, head dips (Seeds et al. 2014)
+      const g = this._groom, ph = this._t * 9;
+      for (const leg of ['lf', 'rf']) { const m = this.legs[leg]; if (!m) continue; accDof(leg, m.lift_dof || 'trochanterfemur.pitch', (22 + Math.sin(ph + (leg === 'lf' ? 0 : Math.PI)) * 10) * g * (m.lift_sign_up || 1)); accDof(leg, m.flex_dof || 'tibia.pitch', 25 * g * (m.flex_sign_up || 1)); }
+      acc('c_head', 'pitch', 12 * g);
+    }
+    if (this._freeze) { /* freezing: no gait, minimal idle motion */ }
     const breath = Math.sin(this._t * 2.2) * 2 * k;
     acc('c_abdomen12', 'pitch', breath); acc('c_abdomen3', 'pitch', breath * 0.5);
     const tw = Math.sin(this._t * 3.1) * 4 * k + Math.sin(this._t * 7.3) * 1.5 * k;

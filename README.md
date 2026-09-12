@@ -22,20 +22,25 @@ Two front ends share one data pipeline:
   antennae, mushroom body / central complex make it "think". Clicking the
   body startles it.
 
-* **Live brain view**: a picture-in-picture camera on the brain, with regions
-  glowing by function (seeing, smelling, steering, memory, moving, pain…)
-  according to what the fly is doing. Illustrative, not real recordings.
-* **Feelings**: a modelled set of drives and affects (pain, pleasure, hunger,
-  fear, curiosity, excitement, calm, tiredness, disgust) shown as gauges. They
-  rise and fall with pokes, videos, movement and rest, and feed the story.
-* **Show it a video** (web): paste a YouTube link (or open `?v=VIDEO_ID`).
-  The video plays on a screen standing in the 3D world; the fly turns to face
-  it and a reaction plan (mood plus timed beats) drives its behaviour.
-  **Fly's eye view** fills your screen with the video seen through a
-  compound-eye mosaic, with the brain's visual centres lit up.
-* **Live story**: a running plain-language description of what the fly is
-  doing, how it feels and what it is paying attention to. Programmatic by
-  default; richer lines come from Claude when the API service has a key.
+* **Circuit model (web)**: everything the fly does is the descending-neuron
+  readout of a rate-based model of named fly circuits driven by real sensory
+  input. See **Science** below.
+* **Live brain view**: a picture-in-picture camera on the brain. Each VFB
+  region or neuron glows with the firing rate of the model population that
+  lives there; a live monitor plots the rates over the last 10 seconds.
+* **Internal states**: gauges for defensive arousal, nociception, hunger,
+  reward, aversion, sleep pressure, locomotor arousal and novelty. They are
+  state variables of the model with identified circuits and citations, not
+  guesses from text.
+* **Eyes**: the fly only sees pixels the page can read. Share your screen or a
+  tab (PC), use the camera (phones), play a video file, or run classic lab
+  stimuli (looming disc, drifting grating, moving bar, flicker) on the screen
+  in front of it. A YouTube link plays on that screen for you, but the fly
+  cannot see it until you share the tab. **Fly's eye view** shows the actual
+  photoreceptor array and motion signals.
+* **Live story**: text derived from the model's active pathway and rates.
+  With an API key, Claude may rephrase the same snapshot; it is not allowed to
+  add anything the snapshot does not contain.
 
 Builds for Windows, Linux, macOS and the web are produced automatically on
 every push to `main` (see **Downloads**).
@@ -216,6 +221,31 @@ bundled starter set always works). The YouTube screen is an iframe projected
 into the 3D scene, so it starts muted (browsers require a tap to unmute) and
 only exists in the web app; desktop builds show the thumbnail and a "Play
 reaction" button.
+
+## Science
+
+`web/src/brainmodel.js` implements, at the population-rate level:
+
+| Pathway | Populations | Output |
+| --- | --- | --- |
+| Optomotor response | photoreceptors → L1/L2 → T4/T5 Reichardt detectors → HS/VS → DNa02 | turning with wide-field motion |
+| Looming escape | T4/T5 → LPLC2 / LC4 → giant fiber | jump and takeoff; threshold lowered by defensive arousal |
+| Object fixation | LC11 small-object detectors → DNa02 | orienting toward a small moving object |
+| Novelty | Kenyon cells → MBON-α'3 | novelty response that adapts with familiarity |
+| Feeding reflex | Gr5a sugar neurons × hunger → proboscis motor neurons; PAM reward | proboscis extension |
+| Bitter avoidance | Gr66a → PPL1 → moonwalker DN | backing away |
+| Touch escape | bristle / nociceptive → giant fiber; light touch → grooming | escape or grooming |
+| Sleep / wake | R5 sleep pressure → dFB → locomotor shutdown | quiescence |
+| Hunger-driven locomotion | NPF / AKH → octopamine → DNp09 | walking drive |
+
+Internal states and references are listed in the app's **Science** tab
+(Gibson 2015; von Reyn 2014; Klapoetke 2017; Tracey 2003; Dus 2011; Burke
+2012; Claridge-Chang 2009; Donlea 2011/2018; Liu 2016; Hattori 2017; Borst
+2014; Bidaye 2014; Seeds 2014, among others). The model is a mechanistic
+sketch, not a connectome simulation; constants are tuned to reproduce the
+published behaviours. Inputs are pixels, touch, taste and optogenetic
+activation only. The desktop (Godot) app still runs the earlier illustrative
+behaviour and has not been ported to the circuit model.
 
 ## Coordinate frames
 

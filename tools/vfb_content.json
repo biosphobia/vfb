@@ -1,5 +1,5 @@
 {
-  "_comment": "Starter content bundled into the app by tools/fetch_vfb.py. Edit freely. IDs are VFB short forms; labels are resolved through VFB's SOLR index at build time.",
+  "_comment": "Starter content bundled into the app. The neuron classes are the populations of the circuit model in web/src/brainmodel.js; labels are resolved through VFB's SOLR index at build time and unresolved ones are skipped.",
   "template_id": "VFB_00101567",
   "template_label": "JRC2018Unisex",
   "neuropils": {
@@ -7,14 +7,103 @@
     "max": 60
   },
   "neuron_classes": [
-    {"label": "adult antennal lobe projection neuron", "max_instances": 6},
-    {"label": "Kenyon cell", "max_instances": 6},
-    {"label": "adult descending neuron", "max_instances": 6},
-    {"label": "adult olfactory receptor neuron", "max_instances": 4},
-    {"label": "mushroom body output neuron", "max_instances": 4},
-    {"label": "adult central complex neuron", "max_instances": 4}
+    {
+      "label": "T4 neuron",
+      "max_instances": 2
+    },
+    {
+      "label": "T5 neuron",
+      "max_instances": 2
+    },
+    {
+      "label": "lobula columnar neuron LC4",
+      "max_instances": 2
+    },
+    {
+      "label": "lobula plate lobula columnar neuron LPLC2",
+      "max_instances": 2
+    },
+    {
+      "label": "lobula columnar neuron LC11",
+      "max_instances": 2
+    },
+    {
+      "label": "horizontal system neuron",
+      "max_instances": 2
+    },
+    {
+      "label": "vertical system neuron",
+      "max_instances": 1
+    },
+    {
+      "label": "giant fiber neuron",
+      "max_instances": 2
+    },
+    {
+      "label": "descending neuron DNa02",
+      "max_instances": 2
+    },
+    {
+      "label": "descending neuron DNp09",
+      "max_instances": 2
+    },
+    {
+      "label": "moonwalker descending neuron",
+      "max_instances": 2
+    },
+    {
+      "label": "Kenyon cell",
+      "max_instances": 3
+    },
+    {
+      "label": "mushroom body output neuron",
+      "max_instances": 3
+    },
+    {
+      "label": "PAM dopaminergic neuron",
+      "max_instances": 3
+    },
+    {
+      "label": "PPL1 dopaminergic neuron",
+      "max_instances": 3
+    },
+    {
+      "label": "dorsal fan-shaped body neuron",
+      "max_instances": 2
+    },
+    {
+      "label": "ellipsoid body ring neuron",
+      "max_instances": 2
+    },
+    {
+      "label": "sugar-sensing gustatory receptor neuron",
+      "max_instances": 2
+    },
+    {
+      "label": "bitter-sensing gustatory receptor neuron",
+      "max_instances": 2
+    },
+    {
+      "label": "NPF neuron",
+      "max_instances": 2
+    },
+    {
+      "label": "octopaminergic neuron",
+      "max_instances": 2
+    },
+    {
+      "label": "Johnston's organ neuron",
+      "max_instances": 2
+    },
+    {
+      "label": "adult descending neuron",
+      "max_instances": 3
+    }
   ],
   "neuron_ids": [],
-  "prefer": ["obj", "swc"],
+  "prefer": [
+    "obj",
+    "swc"
+  ],
   "max_faces_per_object": 60000
 }

@@ -9,7 +9,6 @@ Endpoints
   GET  /api/health              -> {ok, ai, model}
   GET  /api/youtube?id=<id>     -> {id, title, author, thumbnail}
   POST /api/narrate {state}     -> {text, ai}      what the fly is doing / feeling
-  POST /api/react  {id,title}   -> {mood, summary, beats[], ai}  how it reacts to a video
 """
 from __future__ import annotations
 
@@ -52,7 +51,6 @@ if API_KEY:
 _ai_slots = threading.BoundedSemaphore(MAX_CONCURRENT_AI)
 _last_narrate: dict[str, float] = {}
 _yt_cache: dict[str, tuple[float, dict[str, Any]]] = {}
-_react_cache: dict[str, dict[str, Any]] = {}
 _lock = threading.Lock()
 
 
@@ -67,43 +65,15 @@ class NarrateRequest(BaseModel):
     state: dict[str, Any] = Field(default_factory=dict)
 
 
-class ReactRequest(BaseModel):
-    id: str = ""
-    title: str = ""
-    author: str = ""
-
-
-class Beat(BaseModel):
-    at_s: float = Field(description="seconds after the video starts playing")
-    action: str = Field(description="one of: look, startle, walk, fly, feed, groove, antenna, think, rest")
-    note: str = Field(description="one short sentence, plain language, what the fly does and why")
-
-
-class ReactionPlan(BaseModel):
-    mood: str = Field(description="one of: curious, excited, hungry, scared, disgusted, groovy, sleepy")
-    summary: str = Field(description="two friendly sentences about how this fly reacts to this video")
-    beats: list[Beat] = Field(description="4 to 8 beats spread over the first 90 seconds")
-
-
 SYSTEM_NARRATE = (
-    "You narrate a small 3D fruit fly for a public science website. Visitors are not scientists. "
-    "You receive a JSON snapshot of what the fly is doing (behaviour, which brain regions are active, "
-    "what it is looking at or reacting to, any video it is watching). Write 2 short sentences in "
-    "plain, warm, present-tense English from the fly's point of view in the third person ('The fly ...'). "
-    "Mention one real brain region from the snapshot when it fits (e.g. mushroom body for memory, "
-    "antennal lobe for smell, central complex for steering, optic lobes for vision). "
-    "Never invent facts about the video beyond its title. No headings, no lists, no emoji."
+    "You rephrase, for a public science website, a JSON snapshot produced by a circuit model of a fruit fly's "
+    "brain: population firing rates (e.g. T4T5, LPLC2, GF, DNa02, DNp09, PAM, PPL1, dFB), internal state levels "
+    "(defensive arousal, nociception, hunger, reward, aversion, sleep pressure, arousal, novelty), sensory "
+    "signals and the motor readout. Write 2 short present-tense sentences ('The fly ...') that explain what the "
+    "fly is doing and why, quoting only populations and states present in the snapshot. Do not add anything "
+    "the snapshot does not contain, do not speculate about content the fly might be watching, and do not use "
+    "human emotion words except the state names given. No headings, lists or emoji."
 )
-
-SYSTEM_REACT = (
-    "You design how a curious 3D fruit fly reacts to a YouTube video, using only the title and channel. "
-    "Pick a mood and 4-8 timed beats over the first 90 seconds. Beat actions must be from the allowed list. "
-    "Food, fruit, sugar, cooking -> hungry (feed). Danger, spiders, swatting, horror -> scared (startle, fly). "
-    "Rot, mould, garbage, harsh chemicals -> disgusted (antenna, walk away). "
-    "Music, dance -> groovy (groove). Calm nature, sleep -> sleepy. Otherwise curious. "
-    "Keep notes friendly and short, for a general audience."
-)
-
 
 # --------------------------------------------------------------------------- #
 # Helpers
@@ -144,103 +114,6 @@ def call_narrate(state: dict[str, Any]) -> str | None:
         return None
     text = _text_of(response)
     return text or None
-
-
-def call_react(video_id: str, title: str, author: str) -> dict[str, Any] | None:
-    if _client is None:
-        return None
-    prompt = f"Video title: {title!r}\nChannel: {author!r}\nVideo id: {video_id}"
-    try:
-        with _ai_slots:
-            response = _client.messages.parse(
-                model=MODEL,
-                max_tokens=1500,
-                system=SYSTEM_REACT,
-                output_config={"effort": "low"},
-                messages=[{"role": "user", "content": prompt}],
-                output_format=ReactionPlan,
-            )
-    except Exception as e:  # noqa: BLE001
-        log.warning("react failed: %s", e)
-        return None
-    if getattr(response, "stop_reason", "") == "refusal":
-        return None
-    parsed = getattr(response, "parsed_output", None)
-    if parsed is None:
-        return None
-    plan = parsed.model_dump()
-    plan["mood"] = plan.get("mood", "curious").lower().strip()
-    return plan
-
-
-MOOD_WORDS = {
-    "hungry": ["food", "fruit", "banana", "apple", "sugar", "cake", "cook", "recipe", "eat", "juice", "wine", "beer", "honey", "mango", "pizza", "sweet", "dessert", "kitchen", "meal", "snack", "candy", "chocolate"],
-    "disgusted": ["rotten", "mold", "mould", "garbage", "trash", "sewage", "poop", "stink", "vinegar", "bitter", "gross", "disgusting", "spoiled"],
-    "scared": ["spider", "swat", "predator", "horror", "scary", "trap", "kill", "poison", "insecticide", "frog", "bird", "wasp", "danger", "scream", "jump scare", "storm", "thunder", "fire", "explosion", "attack"],
-    "groovy": ["music", "song", "dance", "beat", "remix", "dj", "concert", "live", "bass", "guitar", "piano", "drum", "rap", "pop", "edm", "techno", "jazz", "sing", "karaoke", "lofi"],
-    "sleepy": ["sleep", "asmr", "rain", "calm", "relax", "meditat", "ambient", "slow", "night", "bedtime", "lullaby", "quiet", "nap", "cozy"],
-    "excited": ["fast", "race", "crazy", "insane", "epic", "win", "goal", "highlight", "funny", "prank", "lol", "wow", "amazing", "compilation", "cat", "dog", "puppy", "kitten"],
-}
-
-
-def programmatic_plan(title: str, author: str = "") -> dict[str, Any]:
-    text = f"{title} {author}".lower()
-    mood = "curious"
-    best = 0
-    for m, words in MOOD_WORDS.items():
-        n = sum(1 for w in words if w in text)
-        if n > best:
-            best, mood = n, m
-    beats = {
-        "curious": [(2, "look", "The fly turns to face the screen and studies it."),
-                    (12, "antenna", "Its antennae twitch, sampling the air for clues."),
-                    (25, "walk", "It takes a few steps closer, curious."),
-                    (45, "think", "Something familiar lights up its memory centre."),
-                    (70, "look", "It settles down and keeps watching.")],
-        "hungry": [(2, "look", "The fly notices the food and locks on."),
-                   (8, "feed", "Its proboscis extends, tasting the air."),
-                   (20, "walk", "It hurries toward the screen."),
-                   (35, "feed", "More tasting; the taste centre is buzzing."),
-                   (60, "groove", "A happy wiggle: this looks delicious."),
-                   (80, "feed", "One more taste before it calms down.")],
-        "disgusted": [(2, "look", "The fly looks, then recoils."),
-                      (6, "antenna", "Antennae flick: that smells wrong."),
-                      (14, "walk", "It backs away from the screen."),
-                      (35, "antenna", "Another sniff, another grimace."),
-                      (60, "rest", "It keeps its distance.")],
-        "scared": [(2, "look", "The fly freezes and stares."),
-                   (6, "startle", "It jumps! Something on screen looks dangerous."),
-                   (12, "fly", "Escape flight: wings beating hard."),
-                   (30, "walk", "It creeps back to look again."),
-                   (50, "startle", "Another scare sends it backwards."),
-                   (75, "rest", "Finally it settles, still alert.")],
-        "groovy": [(2, "look", "The fly turns toward the music."),
-                   (6, "groove", "Head bobbing to the beat."),
-                   (20, "fly", "It lifts off for a spin."),
-                   (35, "groove", "Back down and grooving again."),
-                   (60, "walk", "A little dance-walk in circles."),
-                   (85, "groove", "Still moving to the rhythm.")],
-        "sleepy": [(2, "look", "The fly watches quietly."),
-                   (15, "rest", "Its movements slow down."),
-                   (40, "antenna", "A lazy antenna twitch."),
-                   (70, "rest", "Almost dozing off.")],
-        "excited": [(2, "look", "The fly snaps to attention."),
-                    (6, "startle", "It hops with excitement."),
-                    (15, "walk", "Quick steps toward the action."),
-                    (30, "fly", "It takes off in a burst."),
-                    (50, "groove", "Buzzing happily."),
-                    (75, "walk", "Still pacing, wide awake.")],
-    }[mood]
-    summary = {
-        "curious": "This looks interesting. The fly will watch closely and use its memory and smell centres to figure it out.",
-        "hungry": "This looks like food! Expect the fly's taste and smell centres to light up as it tries to reach the screen.",
-        "scared": "Something here looks dangerous to a fly. Expect startles and a quick escape flight.",
-        "disgusted": "Something here smells wrong to a fly. Expect it to sniff, grimace and keep its distance.",
-        "groovy": "Music! The fly will bob its head and buzz along with the beat.",
-        "sleepy": "A calm one. The fly will slow down and relax while it watches.",
-        "excited": "Lots of action here. The fly will hop, pace and buzz around.",
-    }[mood]
-    return {"mood": mood, "summary": summary, "beats": [{"at_s": t, "action": a, "note": n} for t, a, n in beats]}
 
 
 # --------------------------------------------------------------------------- #
@@ -297,30 +170,3 @@ def narrate(req: NarrateRequest, request: Request) -> dict[str, Any]:
         return {"text": "", "ai": False}
     text = call_narrate(req.state)
     return {"text": text or "", "ai": bool(text)}
-
-
-@app.post("/api/react")
-def react(req: ReactRequest) -> dict[str, Any]:
-    vid = req.id.strip()
-    title = req.title.strip()
-    author = req.author.strip()
-    if vid and not YT_ID_RE.match(vid):
-        raise HTTPException(400, "invalid video id")
-    if not title and vid:
-        title = youtube(vid).get("title", "")
-    key = vid or title
-    with _lock:
-        cached = _react_cache.get(key)
-    if cached:
-        return cached
-    plan = call_react(vid, title, author) if ai_enabled() else None
-    ai = plan is not None
-    if plan is None:
-        plan = programmatic_plan(title, author)
-    plan["ai"] = ai
-    plan["title"] = title
-    with _lock:
-        if len(_react_cache) > 2000:
-            _react_cache.clear()
-        _react_cache[key] = plan
-    return plan

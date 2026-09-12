@@ -22,25 +22,6 @@ def test_youtube_rejects_bad_id():
     assert client.get("/api/youtube", params={"id": "bad id!"}).status_code == 400
 
 
-def test_programmatic_plan_moods():
-    assert srv.programmatic_plan("Giant spider attacks camera")["mood"] == "scared"
-    assert srv.programmatic_plan("How to make banana bread recipe")["mood"] == "hungry"
-    assert srv.programmatic_plan("Lofi hip hop beats to relax")["mood"] in ("groovy", "sleepy")
-    plan = srv.programmatic_plan("A walk through the park")
-    assert plan["mood"] == "curious"
-    assert 4 <= len(plan["beats"]) <= 8
-    assert all(set(b) == {"at_s", "action", "note"} for b in plan["beats"])
-
-
-def test_react_falls_back_without_ai(monkeypatch):
-    monkeypatch.setattr(srv, "_client", None)
-    r = client.post("/api/react", json={"id": "dQw4w9WgXcQ", "title": "Never gonna give you up (music video)"})
-    assert r.status_code == 200
-    body = r.json()
-    assert body["ai"] is False
-    assert body["mood"] == "groovy"
-
-
 def test_narrate_without_ai_and_rate_limit(monkeypatch):
     monkeypatch.setattr(srv, "_client", None)
     srv._last_narrate.clear()
