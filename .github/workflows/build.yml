@@ -77,9 +77,6 @@ jobs:
           - preset: macOS
             out: build/macos/vfb-fly-explorer.zip
             artifact: vfb-fly-explorer-macos
-          - preset: Web
-            out: build/web/index.html
-            artifact: vfb-fly-explorer-web
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
@@ -123,20 +120,55 @@ jobs:
             Linux)   (cd linux && chmod +x vfb-fly-explorer.x86_64 && tar czf ../${{ matrix.artifact }}.tar.gz .) ;;
             Windows) (cd windows && zip -qr ../${{ matrix.artifact }}.zip .) ;;
             macOS)   cp macos/vfb-fly-explorer.zip ${{ matrix.artifact }}.zip ;;
-            Web)     (cd web && zip -qr ../${{ matrix.artifact }}.zip .) ;;
           esac
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact }}
+          path: build/${{ matrix.artifact }}.*
+          if-no-files-found: error
+
+  web:
+    name: Web app (browser-first, Three.js)
+    needs: assets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: generated-assets
+          path: godot/assets/generated
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Assemble static site
+        run: |
+          set -euo pipefail
+          rm -rf build/web && mkdir -p build/web
+          cp -r web/index.html web/styles.css web/src web/vendor web/data-default build/web/
+          mkdir -p build/web/data
+          cp -r godot/assets/generated/fly build/web/data/
+          if [ -d godot/assets/generated/vfb ]; then cp -r godot/assets/generated/vfb build/web/data/; fi
+          du -sh build/web
+      - name: Syntax check modules
+        run: for f in web/src/*.js; do node --check --input-type=module < "$f" || { echo "syntax error in $f"; exit 1; }; done
+      - name: Browser smoke test
+        run: |
+          pip install playwright && python -m playwright install --with-deps chromium
+          python web/test/smoke.py
+      - name: Package
+        run: (cd build/web && zip -qr ../vfb-fly-explorer-web.zip .)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vfb-fly-explorer-web
           path: |
-            build/${{ matrix.artifact }}.*
+            build/vfb-fly-explorer-web.zip
             build/web
           if-no-files-found: error
 
   release:
     name: Publish release
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: export
+    needs: [export, web]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -159,14 +191,14 @@ jobs:
             * `vfb-fly-explorer-windows.zip` – Windows x86_64 (unsigned; SmartScreen may warn)
             * `vfb-fly-explorer-linux.tar.gz` – Linux x86_64
             * `vfb-fly-explorer-macos.zip` – macOS universal (unsigned; right-click → Open on first launch)
-            * `vfb-fly-explorer-web.zip` – static web build (also deployed via Render)
+            * `vfb-fly-explorer-web.zip` – browser-first web app (also deployed via Render)
           files: out/*
           make_latest: true
 
   web-publish:
     name: Publish web build to web-dist
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: export
+    needs: web
     runs-on: ubuntu-latest
     permissions:
       contents: write

@@ -80,7 +80,7 @@ class Beat(BaseModel):
 
 
 class ReactionPlan(BaseModel):
-    mood: str = Field(description="one of: curious, excited, hungry, scared, groovy, sleepy")
+    mood: str = Field(description="one of: curious, excited, hungry, scared, disgusted, groovy, sleepy")
     summary: str = Field(description="two friendly sentences about how this fly reacts to this video")
     beats: list[Beat] = Field(description="4 to 8 beats spread over the first 90 seconds")
 
@@ -99,6 +99,7 @@ SYSTEM_REACT = (
     "You design how a curious 3D fruit fly reacts to a YouTube video, using only the title and channel. "
     "Pick a mood and 4-8 timed beats over the first 90 seconds. Beat actions must be from the allowed list. "
     "Food, fruit, sugar, cooking -> hungry (feed). Danger, spiders, swatting, horror -> scared (startle, fly). "
+    "Rot, mould, garbage, harsh chemicals -> disgusted (antenna, walk away). "
     "Music, dance -> groovy (groove). Calm nature, sleep -> sleepy. Otherwise curious. "
     "Keep notes friendly and short, for a general audience."
 )
@@ -174,6 +175,7 @@ def call_react(video_id: str, title: str, author: str) -> dict[str, Any] | None:
 
 MOOD_WORDS = {
     "hungry": ["food", "fruit", "banana", "apple", "sugar", "cake", "cook", "recipe", "eat", "juice", "wine", "beer", "honey", "mango", "pizza", "sweet", "dessert", "kitchen", "meal", "snack", "candy", "chocolate"],
+    "disgusted": ["rotten", "mold", "mould", "garbage", "trash", "sewage", "poop", "stink", "vinegar", "bitter", "gross", "disgusting", "spoiled"],
     "scared": ["spider", "swat", "predator", "horror", "scary", "trap", "kill", "poison", "insecticide", "frog", "bird", "wasp", "danger", "scream", "jump scare", "storm", "thunder", "fire", "explosion", "attack"],
     "groovy": ["music", "song", "dance", "beat", "remix", "dj", "concert", "live", "bass", "guitar", "piano", "drum", "rap", "pop", "edm", "techno", "jazz", "sing", "karaoke", "lofi"],
     "sleepy": ["sleep", "asmr", "rain", "calm", "relax", "meditat", "ambient", "slow", "night", "bedtime", "lullaby", "quiet", "nap", "cozy"],
@@ -201,6 +203,11 @@ def programmatic_plan(title: str, author: str = "") -> dict[str, Any]:
                    (35, "feed", "More tasting; the taste centre is buzzing."),
                    (60, "groove", "A happy wiggle: this looks delicious."),
                    (80, "feed", "One more taste before it calms down.")],
+        "disgusted": [(2, "look", "The fly looks, then recoils."),
+                      (6, "antenna", "Antennae flick: that smells wrong."),
+                      (14, "walk", "It backs away from the screen."),
+                      (35, "antenna", "Another sniff, another grimace."),
+                      (60, "rest", "It keeps its distance.")],
         "scared": [(2, "look", "The fly freezes and stares."),
                    (6, "startle", "It jumps! Something on screen looks dangerous."),
                    (12, "fly", "Escape flight: wings beating hard."),
@@ -228,6 +235,7 @@ def programmatic_plan(title: str, author: str = "") -> dict[str, Any]:
         "curious": "This looks interesting. The fly will watch closely and use its memory and smell centres to figure it out.",
         "hungry": "This looks like food! Expect the fly's taste and smell centres to light up as it tries to reach the screen.",
         "scared": "Something here looks dangerous to a fly. Expect startles and a quick escape flight.",
+        "disgusted": "Something here smells wrong to a fly. Expect it to sniff, grimace and keep its distance.",
         "groovy": "Music! The fly will bob its head and buzz along with the beat.",
         "sleepy": "A calm one. The fly will slow down and relax while it watches.",
         "excited": "Lots of action here. The fly will hop, pace and buzz around.",

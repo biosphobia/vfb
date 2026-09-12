@@ -1,0 +1,2431 @@
+{
+  "source": "NeuroMechFly v2 (flygym), Apache-2.0, https://github.com/NeLy-EPFL/flygym",
+  "units": "mm",
+  "up_axis_in_glb": "Y (converted from MuJoCo Z-up; segment-local frames keep MuJoCo axes: x=anterior, y=left, z=up)",
+  "dof_axes": {
+    "yaw": "x",
+    "pitch": "y",
+    "roll": "z"
+  },
+  "dof_order": [
+    "yaw",
+    "pitch",
+    "roll"
+  ],
+  "root_node": "FlyBody",
+  "ground_offset_mm": 0.0742,
+  "head_center_local_mm": [
+    0.2126,
+    0.0,
+    0.0185
+  ],
+  "nodes": [
+    {
+      "name": "c_thorax",
+      "parent": null,
+      "category": "body",
+      "dofs": [],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        0.496,
+        0.0,
+        1.3
+      ],
+      "local_quat_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -1.0233,
+        -0.445,
+        -0.6352
+      ],
+      "aabb_max_mm": [
+        0.0402,
+        0.445,
+        0.4438
+      ]
+    },
+    {
+      "name": "c_head",
+      "parent": "c_thorax",
+      "category": "body",
+      "dofs": [
+        "yaw",
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        0.0287,
+        0.0,
+        0.0007
+      ],
+      "local_quat_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0153,
+        -0.3764,
+        -0.2764
+      ],
+      "aabb_max_mm": [
+        0.4954,
+        0.3764,
+        0.4015
+      ]
+    },
+    {
+      "name": "c_rostrum",
+      "parent": "c_head",
+      "category": "antenna",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        0.43,
+        0.0,
+        -0.274
+      ],
+      "local_quat_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.3779,
+        -0.2068,
+        -0.278
+      ],
+      "aabb_max_mm": [
+        0.0398,
+        0.2068,
+        0.225
+      ]
+    },
+    {
+      "name": "c_haustellum",
+      "parent": "c_rostrum",
+      "category": "antenna",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        -0.371,
+        0.0,
+        -0.0196
+      ],
+      "local_quat_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0135,
+        -0.1748,
+        -0.2208
+      ],
+      "aabb_max_mm": [
+        0.3413,
+        0.1748,
+        0.0219
+      ]
+    },
+    {
+      "name": "c_abdomen12",
+      "parent": "c_thorax",
+      "category": "abdomen",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        -0.862,
+        0.0,
+        0.0
+      ],
+      "local_quat_wxyz": [
+        0.991376,
+        0.0,
+        -0.13105,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.4786,
+        -0.4781,
+        -0.3479
+      ],
+      "aabb_max_mm": [
+        -0.0055,
+        0.4781,
+        0.376
+      ]
+    },
+    {
+      "name": "c_abdomen3",
+      "parent": "c_abdomen12",
+      "category": "abdomen",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        -0.326,
+        0.0,
+        0.04
+      ],
+      "local_quat_wxyz": [
+        0.999075,
+        -0.0,
+        -0.043003,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.2595,
+        -0.4901,
+        -0.4406
+      ],
+      "aabb_max_mm": [
+        0.1176,
+        0.4901,
+        0.3392
+      ]
+    },
+    {
+      "name": "c_abdomen4",
+      "parent": "c_abdomen3",
+      "category": "abdomen",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        -0.208,
+        0.0,
+        0.025
+      ],
+      "local_quat_wxyz": [
+        0.999075,
+        -0.0,
+        0.043003,
+        -0.0
+      ],
+      "aabb_min_mm": [
+        -0.2635,
+        -0.4944,
+        -0.422
+      ],
+      "aabb_max_mm": [
+        0.0817,
+        0.4944,
+        0.2991
+      ]
+    },
+    {
+      "name": "c_abdomen5",
+      "parent": "c_abdomen4",
+      "category": "abdomen",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        -0.174,
+        0.0,
+        0.009
+      ],
+      "local_quat_wxyz": [
+        0.99996,
+        -0.0,
+        0.009,
+        -0.0
+      ],
+      "aabb_min_mm": [
+        -0.3116,
+        -0.449,
+        -0.4291
+      ],
+      "aabb_max_mm": [
+        0.1031,
+        0.449,
+        0.2907
+      ]
+    },
+    {
+      "name": "c_abdomen6",
+      "parent": "c_abdomen5",
+      "category": "abdomen",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        -0.228,
+        0.0,
+        0.009
+      ],
+      "local_quat_wxyz": [
+        0.99996,
+        -0.0,
+        0.009,
+        -0.0
+      ],
+      "aabb_min_mm": [
+        -0.4509,
+        -0.3724,
+        -0.3597
+      ],
+      "aabb_max_mm": [
+        0.1296,
+        0.3724,
+        0.2702
+      ]
+    },
+    {
+      "name": "l_eye",
+      "parent": "c_head",
+      "category": "eye",
+      "dofs": [],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        0.231,
+        -0.0,
+        0.017
+      ],
+      "local_quat_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.2059,
+        0.1985,
+        -0.2777
+      ],
+      "aabb_max_mm": [
+        0.1972,
+        0.4149,
+        0.2306
+      ]
+    },
+    {
+      "name": "l_pedicel",
+      "parent": "c_head",
+      "category": "antenna",
+      "dofs": [
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        0.429,
+        0.086,
+        0.083
+      ],
+      "local_quat_wxyz": [
+        0.962305,
+        0.261301,
+        0.0729,
+        -0.0194
+      ],
+      "aabb_min_mm": [
+        -0.0194,
+        -0.0824,
+        -0.0813
+      ],
+      "aabb_max_mm": [
+        0.1775,
+        0.1013,
+        0.0466
+      ]
+    },
+    {
+      "name": "l_funiculus",
+      "parent": "l_pedicel",
+      "category": "antenna",
+      "dofs": [
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        0.051,
+        -0.00056,
+        -0.0441
+      ],
+      "local_quat_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0503,
+        -0.0742,
+        -0.2007
+      ],
+      "aabb_max_mm": [
+        0.0671,
+        0.0485,
+        -0.0051
+      ]
+    },
+    {
+      "name": "l_arista",
+      "parent": "l_funiculus",
+      "category": "arista",
+      "dofs": [],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        0.0198,
+        0.0539,
+        -0.0683
+      ],
+      "local_quat_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0183,
+        -0.0137,
+        -0.055
+      ],
+      "aabb_max_mm": [
+        0.0455,
+        0.2485,
+        0.0817
+      ]
+    },
+    {
+      "name": "l_haltere",
+      "parent": "c_thorax",
+      "category": "haltere",
+      "dofs": [
+        "yaw",
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        -0.806,
+        0.214,
+        -0.149
+      ],
+      "local_quat_wxyz": [
+        0.945708,
+        0.123962,
+        0.038988,
+        0.297908
+      ],
+      "aabb_min_mm": [
+        -0.0788,
+        -0.0142,
+        -0.0602
+      ],
+      "aabb_max_mm": [
+        0.0377,
+        0.3556,
+        0.0844
+      ]
+    },
+    {
+      "name": "l_wing",
+      "parent": "c_thorax",
+      "category": "wing",
+      "dofs": [
+        "yaw",
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        -0.674,
+        0.395,
+        0.081
+      ],
+      "local_quat_wxyz": [
+        0.649074,
+        0.036004,
+        -0.065007,
+        0.757087
+      ],
+      "aabb_min_mm": [
+        -0.6786,
+        -0.1052,
+        -0.0638
+      ],
+      "aabb_max_mm": [
+        0.405,
+        2.3007,
+        0.371
+      ]
+    },
+    {
+      "name": "r_eye",
+      "parent": "c_head",
+      "category": "eye",
+      "dofs": [],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        0.231,
+        0.0,
+        0.017
+      ],
+      "local_quat_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.2059,
+        -0.4149,
+        -0.2777
+      ],
+      "aabb_max_mm": [
+        0.1972,
+        -0.1985,
+        0.2306
+      ]
+    },
+    {
+      "name": "r_pedicel",
+      "parent": "c_head",
+      "category": "antenna",
+      "dofs": [
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        0.429,
+        -0.086,
+        0.083
+      ],
+      "local_quat_wxyz": [
+        0.962305,
+        -0.261301,
+        0.0729,
+        0.0194
+      ],
+      "aabb_min_mm": [
+        -0.0194,
+        -0.1013,
+        -0.0813
+      ],
+      "aabb_max_mm": [
+        0.1775,
+        0.0824,
+        0.0466
+      ]
+    },
+    {
+      "name": "r_funiculus",
+      "parent": "r_pedicel",
+      "category": "antenna",
+      "dofs": [
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        0.051,
+        0.00056,
+        -0.0441
+      ],
+      "local_quat_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0503,
+        -0.0485,
+        -0.2007
+      ],
+      "aabb_max_mm": [
+        0.0671,
+        0.0742,
+        -0.0051
+      ]
+    },
+    {
+      "name": "r_arista",
+      "parent": "r_funiculus",
+      "category": "arista",
+      "dofs": [],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        0.0198,
+        -0.0539,
+        -0.0683
+      ],
+      "local_quat_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0183,
+        -0.2485,
+        -0.055
+      ],
+      "aabb_max_mm": [
+        0.0455,
+        0.0137,
+        0.0817
+      ]
+    },
+    {
+      "name": "r_haltere",
+      "parent": "c_thorax",
+      "category": "haltere",
+      "dofs": [
+        "yaw",
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        -0.806,
+        -0.214,
+        -0.149
+      ],
+      "local_quat_wxyz": [
+        0.945708,
+        -0.123962,
+        0.038988,
+        -0.297908
+      ],
+      "aabb_min_mm": [
+        -0.0788,
+        -0.3556,
+        -0.0602
+      ],
+      "aabb_max_mm": [
+        0.0377,
+        0.0142,
+        0.0844
+      ]
+    },
+    {
+      "name": "r_wing",
+      "parent": "c_thorax",
+      "category": "wing",
+      "dofs": [
+        "yaw",
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {},
+      "local_pos_mm": [
+        -0.674,
+        -0.395,
+        0.081
+      ],
+      "local_quat_wxyz": [
+        0.649074,
+        -0.036004,
+        -0.065007,
+        -0.757087
+      ],
+      "aabb_min_mm": [
+        -0.6786,
+        -2.3007,
+        -0.0638
+      ],
+      "aabb_max_mm": [
+        0.405,
+        0.1052,
+        0.371
+      ]
+    },
+    {
+      "name": "lf_coxa",
+      "parent": "c_thorax",
+      "category": "leg",
+      "dofs": [
+        "yaw",
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {
+        "pitch": 19.0,
+        "roll": 33.0,
+        "yaw": -17.0
+      },
+      "local_pos_mm": [
+        -0.161,
+        0.172,
+        -0.23
+      ],
+      "local_quat_wxyz": [
+        0.942211,
+        -0.093418,
+        0.197917,
+        0.253652
+      ],
+      "aabb_min_mm": [
+        -0.0627,
+        -0.0868,
+        -0.4271
+      ],
+      "aabb_max_mm": [
+        0.089,
+        0.0829,
+        0.0325
+      ]
+    },
+    {
+      "name": "lf_trochanterfemur",
+      "parent": "lf_coxa",
+      "category": "leg",
+      "dofs": [
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {
+        "pitch": -139.0,
+        "roll": -15.0
+      },
+      "local_pos_mm": [
+        -0.00181,
+        -0.00172,
+        -0.365
+      ],
+      "local_quat_wxyz": [
+        0.347211,
+        0.12226,
+        -0.928659,
+        -0.045711
+      ],
+      "aabb_min_mm": [
+        -0.0946,
+        -0.0482,
+        -0.7631
+      ],
+      "aabb_max_mm": [
+        0.0633,
+        0.0902,
+        -0.0016
+      ]
+    },
+    {
+      "name": "lf_tibia",
+      "parent": "lf_trochanterfemur",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": 78.0
+      },
+      "local_pos_mm": [
+        -0.00465,
+        -0.00149,
+        -0.705
+      ],
+      "local_quat_wxyz": [
+        0.777146,
+        -0.0,
+        0.62932,
+        -0.0
+      ],
+      "aabb_min_mm": [
+        -0.0359,
+        -0.0449,
+        -0.562
+      ],
+      "aabb_max_mm": [
+        0.0733,
+        0.0568,
+        -0.0116
+      ]
+    },
+    {
+      "name": "lf_tarsus1",
+      "parent": "lf_tibia",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -10.0
+      },
+      "local_pos_mm": [
+        -0.00014,
+        -0.00095,
+        -0.518
+      ],
+      "local_quat_wxyz": [
+        0.996195,
+        0.0,
+        -0.087156,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0309,
+        -0.0327,
+        -0.261
+      ],
+      "aabb_max_mm": [
+        0.0384,
+        0.027,
+        -0.0193
+      ]
+    },
+    {
+      "name": "lf_tarsus2",
+      "parent": "lf_tarsus1",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.00182,
+        -0.00098,
+        -0.225
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0237,
+        -0.0283,
+        -0.1812
+      ],
+      "aabb_max_mm": [
+        0.0349,
+        0.0214,
+        -0.0241
+      ]
+    },
+    {
+      "name": "lf_tarsus3",
+      "parent": "lf_tarsus2",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.00136,
+        -0.00018,
+        -0.154
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0172,
+        -0.0279,
+        -0.1279
+      ],
+      "aabb_max_mm": [
+        0.0325,
+        0.0181,
+        -0.0179
+      ]
+    },
+    {
+      "name": "lf_tarsus4",
+      "parent": "lf_tarsus3",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.00169,
+        0.0003,
+        -0.0985
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0194,
+        -0.0259,
+        -0.1126
+      ],
+      "aabb_max_mm": [
+        0.024,
+        0.0164,
+        -0.0156
+      ]
+    },
+    {
+      "name": "lf_tarsus5",
+      "parent": "lf_tarsus4",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.00171,
+        -0.00022,
+        -0.087
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0272,
+        -0.0336,
+        -0.117
+      ],
+      "aabb_max_mm": [
+        0.0298,
+        0.0204,
+        -0.0121
+      ]
+    },
+    {
+      "name": "lm_coxa",
+      "parent": "c_thorax",
+      "category": "leg",
+      "dofs": [
+        "yaw",
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {
+        "pitch": 8.0,
+        "roll": 87.0,
+        "yaw": -10.0
+      },
+      "local_pos_mm": [
+        -0.557,
+        0.125,
+        -0.482
+      ],
+      "local_quat_wxyz": [
+        0.725039,
+        -0.015232,
+        0.110255,
+        0.679655
+      ],
+      "aabb_min_mm": [
+        -0.0907,
+        -0.084,
+        -0.2129
+      ],
+      "aabb_max_mm": [
+        0.0834,
+        0.1179,
+        0.058
+      ]
+    },
+    {
+      "name": "lm_trochanterfemur",
+      "parent": "lm_coxa",
+      "category": "leg",
+      "dofs": [
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {
+        "pitch": -139.0,
+        "roll": 15.0
+      },
+      "local_pos_mm": [
+        -0.00022,
+        0.00015,
+        -0.181
+      ],
+      "local_quat_wxyz": [
+        0.347211,
+        -0.12226,
+        -0.928659,
+        0.045711
+      ],
+      "aabb_min_mm": [
+        -0.0569,
+        -0.0562,
+        -0.8296
+      ],
+      "aabb_max_mm": [
+        0.0901,
+        0.0721,
+        0.0062
+      ]
+    },
+    {
+      "name": "lm_tibia",
+      "parent": "lm_trochanterfemur",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": 103.0
+      },
+      "local_pos_mm": [
+        -0.00097,
+        6e-05,
+        -0.784
+      ],
+      "local_quat_wxyz": [
+        0.622515,
+        0.0,
+        0.782608,
+        -0.0
+      ],
+      "aabb_min_mm": [
+        -0.0482,
+        -0.039,
+        -0.7264
+      ],
+      "aabb_max_mm": [
+        0.0693,
+        0.0583,
+        0.0109
+      ]
+    },
+    {
+      "name": "lm_tarsus1",
+      "parent": "lm_tibia",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -20.0
+      },
+      "local_pos_mm": [
+        7e-05,
+        -0.00037,
+        -0.667
+      ],
+      "local_quat_wxyz": [
+        0.984808,
+        0.0,
+        -0.173648,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0512,
+        -0.0205,
+        -0.3182
+      ],
+      "aabb_max_mm": [
+        0.0246,
+        0.0405,
+        -0.0229
+      ]
+    },
+    {
+      "name": "lm_tarsus2",
+      "parent": "lm_tarsus1",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.00051,
+        -0.0001,
+        -0.292
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0366,
+        -0.0145,
+        -0.1786
+      ],
+      "aabb_max_mm": [
+        0.0167,
+        0.0336,
+        -0.0173
+      ]
+    },
+    {
+      "name": "lm_tarsus3",
+      "parent": "lm_tarsus2",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        -3e-05,
+        -0.00015,
+        -0.16
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0373,
+        -0.0132,
+        -0.1169
+      ],
+      "aabb_max_mm": [
+        0.0202,
+        0.0342,
+        -0.0099
+      ]
+    },
+    {
+      "name": "lm_tarsus4",
+      "parent": "lm_tarsus3",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        -0.00013,
+        -0.00019,
+        -0.0911
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0303,
+        -0.0105,
+        -0.0826
+      ],
+      "aabb_max_mm": [
+        0.0171,
+        0.0299,
+        -0.0122
+      ]
+    },
+    {
+      "name": "lm_tarsus5",
+      "parent": "lm_tarsus4",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.0009,
+        0.0001,
+        -0.0635
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0386,
+        -0.02,
+        -0.1107
+      ],
+      "aabb_max_mm": [
+        0.0227,
+        0.0416,
+        -0.006
+      ]
+    },
+    {
+      "name": "lh_coxa",
+      "parent": "c_thorax",
+      "category": "leg",
+      "dofs": [
+        "yaw",
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {
+        "pitch": 24.0,
+        "roll": 134.0,
+        "yaw": 3.0
+      },
+      "local_pos_mm": [
+        -0.784,
+        0.087,
+        -0.497
+      ],
+      "local_quat_wxyz": [
+        0.377052,
+        0.201323,
+        0.05764,
+        0.902208
+      ],
+      "aabb_min_mm": [
+        -0.1028,
+        -0.051,
+        -0.227
+      ],
+      "aabb_max_mm": [
+        0.0708,
+        0.1103,
+        0.0404
+      ]
+    },
+    {
+      "name": "lh_trochanterfemur",
+      "parent": "lh_coxa",
+      "category": "leg",
+      "dofs": [
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {
+        "pitch": -111.0,
+        "roll": 4.0
+      },
+      "local_pos_mm": [
+        -0.00018,
+        -0.00023,
+        -0.199
+      ],
+      "local_quat_wxyz": [
+        0.566061,
+        -0.028762,
+        -0.823624,
+        0.019767
+      ],
+      "aabb_min_mm": [
+        -0.0619,
+        -0.0916,
+        -0.8692
+      ],
+      "aabb_max_mm": [
+        0.1077,
+        0.0743,
+        0.0046
+      ]
+    },
+    {
+      "name": "lh_tibia",
+      "parent": "lh_trochanterfemur",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": 101.0
+      },
+      "local_pos_mm": [
+        0.00011,
+        0.00029,
+        -0.836
+      ],
+      "local_quat_wxyz": [
+        0.636078,
+        -0.0,
+        0.771625,
+        -0.0
+      ],
+      "aabb_min_mm": [
+        -0.0604,
+        -0.0595,
+        -0.7289
+      ],
+      "aabb_max_mm": [
+        0.0729,
+        0.056,
+        0.0311
+      ]
+    },
+    {
+      "name": "lh_tarsus1",
+      "parent": "lh_tibia",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        -0.0,
+        -0.00032,
+        -0.684
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0699,
+        -0.0269,
+        -0.3738
+      ],
+      "aabb_max_mm": [
+        0.023,
+        0.055,
+        0.0004
+      ]
+    },
+    {
+      "name": "lh_tarsus2",
+      "parent": "lh_tarsus1",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.0001,
+        0.00051,
+        -0.353
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0548,
+        -0.0179,
+        -0.1972
+      ],
+      "aabb_max_mm": [
+        0.0242,
+        0.0456,
+        -0.0008
+      ]
+    },
+    {
+      "name": "lh_tarsus3",
+      "parent": "lh_tarsus2",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.00012,
+        -0.00026,
+        -0.175
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0404,
+        -0.0106,
+        -0.1101
+      ],
+      "aabb_max_mm": [
+        0.0111,
+        0.0356,
+        -0.0023
+      ]
+    },
+    {
+      "name": "lh_tarsus4",
+      "parent": "lh_tarsus3",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        -0.00026,
+        0.00033,
+        -0.0967
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0363,
+        -0.012,
+        -0.0881
+      ],
+      "aabb_max_mm": [
+        0.011,
+        0.033,
+        0.0001
+      ]
+    },
+    {
+      "name": "lh_tarsus5",
+      "parent": "lh_tarsus4",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.00021,
+        6e-05,
+        -0.0733
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0539,
+        -0.0202,
+        -0.107
+      ],
+      "aabb_max_mm": [
+        0.0174,
+        0.0455,
+        -0.0009
+      ]
+    },
+    {
+      "name": "rf_coxa",
+      "parent": "c_thorax",
+      "category": "leg",
+      "dofs": [
+        "yaw",
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {
+        "pitch": 19.0,
+        "roll": -33.0,
+        "yaw": 17.0
+      },
+      "local_pos_mm": [
+        -0.161,
+        -0.172,
+        -0.23
+      ],
+      "local_quat_wxyz": [
+        0.942211,
+        0.093418,
+        0.197917,
+        -0.253652
+      ],
+      "aabb_min_mm": [
+        -0.0627,
+        -0.0829,
+        -0.4271
+      ],
+      "aabb_max_mm": [
+        0.089,
+        0.0868,
+        0.0325
+      ]
+    },
+    {
+      "name": "rf_trochanterfemur",
+      "parent": "rf_coxa",
+      "category": "leg",
+      "dofs": [
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {
+        "pitch": -139.0,
+        "roll": 15.0
+      },
+      "local_pos_mm": [
+        -0.00181,
+        0.00172,
+        -0.365
+      ],
+      "local_quat_wxyz": [
+        0.347211,
+        -0.12226,
+        -0.928659,
+        0.045711
+      ],
+      "aabb_min_mm": [
+        -0.0946,
+        -0.0902,
+        -0.7631
+      ],
+      "aabb_max_mm": [
+        0.0633,
+        0.0482,
+        -0.0016
+      ]
+    },
+    {
+      "name": "rf_tibia",
+      "parent": "rf_trochanterfemur",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": 78.0
+      },
+      "local_pos_mm": [
+        -0.00465,
+        0.00149,
+        -0.705
+      ],
+      "local_quat_wxyz": [
+        0.777146,
+        -0.0,
+        0.62932,
+        -0.0
+      ],
+      "aabb_min_mm": [
+        -0.0359,
+        -0.0568,
+        -0.562
+      ],
+      "aabb_max_mm": [
+        0.0733,
+        0.0449,
+        -0.0116
+      ]
+    },
+    {
+      "name": "rf_tarsus1",
+      "parent": "rf_tibia",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -10.0
+      },
+      "local_pos_mm": [
+        -0.00014,
+        0.00095,
+        -0.518
+      ],
+      "local_quat_wxyz": [
+        0.996195,
+        0.0,
+        -0.087156,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0309,
+        -0.027,
+        -0.261
+      ],
+      "aabb_max_mm": [
+        0.0384,
+        0.0327,
+        -0.0193
+      ]
+    },
+    {
+      "name": "rf_tarsus2",
+      "parent": "rf_tarsus1",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.00182,
+        0.00098,
+        -0.225
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0237,
+        -0.0214,
+        -0.1812
+      ],
+      "aabb_max_mm": [
+        0.0349,
+        0.0283,
+        -0.0241
+      ]
+    },
+    {
+      "name": "rf_tarsus3",
+      "parent": "rf_tarsus2",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.00136,
+        0.00018,
+        -0.154
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0172,
+        -0.0181,
+        -0.1279
+      ],
+      "aabb_max_mm": [
+        0.0325,
+        0.0279,
+        -0.0179
+      ]
+    },
+    {
+      "name": "rf_tarsus4",
+      "parent": "rf_tarsus3",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.00169,
+        -0.0003,
+        -0.0985
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0194,
+        -0.0164,
+        -0.1126
+      ],
+      "aabb_max_mm": [
+        0.024,
+        0.0259,
+        -0.0156
+      ]
+    },
+    {
+      "name": "rf_tarsus5",
+      "parent": "rf_tarsus4",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.00171,
+        0.00022,
+        -0.087
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0272,
+        -0.0204,
+        -0.117
+      ],
+      "aabb_max_mm": [
+        0.0298,
+        0.0336,
+        -0.0121
+      ]
+    },
+    {
+      "name": "rm_coxa",
+      "parent": "c_thorax",
+      "category": "leg",
+      "dofs": [
+        "yaw",
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {
+        "pitch": 8.0,
+        "roll": -87.0,
+        "yaw": 10.0
+      },
+      "local_pos_mm": [
+        -0.557,
+        -0.125,
+        -0.482
+      ],
+      "local_quat_wxyz": [
+        0.725039,
+        0.015232,
+        0.110255,
+        -0.679655
+      ],
+      "aabb_min_mm": [
+        -0.0907,
+        -0.1179,
+        -0.2129
+      ],
+      "aabb_max_mm": [
+        0.0834,
+        0.084,
+        0.058
+      ]
+    },
+    {
+      "name": "rm_trochanterfemur",
+      "parent": "rm_coxa",
+      "category": "leg",
+      "dofs": [
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {
+        "pitch": -139.0,
+        "roll": -15.0
+      },
+      "local_pos_mm": [
+        -0.00022,
+        -0.00015,
+        -0.181
+      ],
+      "local_quat_wxyz": [
+        0.347211,
+        0.12226,
+        -0.928659,
+        -0.045711
+      ],
+      "aabb_min_mm": [
+        -0.0569,
+        -0.0721,
+        -0.8296
+      ],
+      "aabb_max_mm": [
+        0.0901,
+        0.0562,
+        0.0062
+      ]
+    },
+    {
+      "name": "rm_tibia",
+      "parent": "rm_trochanterfemur",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": 103.0
+      },
+      "local_pos_mm": [
+        -0.00097,
+        -6e-05,
+        -0.784
+      ],
+      "local_quat_wxyz": [
+        0.622515,
+        0.0,
+        0.782608,
+        -0.0
+      ],
+      "aabb_min_mm": [
+        -0.0482,
+        -0.0583,
+        -0.7264
+      ],
+      "aabb_max_mm": [
+        0.0693,
+        0.039,
+        0.0109
+      ]
+    },
+    {
+      "name": "rm_tarsus1",
+      "parent": "rm_tibia",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -20.0
+      },
+      "local_pos_mm": [
+        7e-05,
+        0.00037,
+        -0.667
+      ],
+      "local_quat_wxyz": [
+        0.984808,
+        0.0,
+        -0.173648,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0512,
+        -0.0405,
+        -0.3182
+      ],
+      "aabb_max_mm": [
+        0.0246,
+        0.0205,
+        -0.0229
+      ]
+    },
+    {
+      "name": "rm_tarsus2",
+      "parent": "rm_tarsus1",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.00051,
+        0.0001,
+        -0.292
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0366,
+        -0.0336,
+        -0.1786
+      ],
+      "aabb_max_mm": [
+        0.0167,
+        0.0145,
+        -0.0173
+      ]
+    },
+    {
+      "name": "rm_tarsus3",
+      "parent": "rm_tarsus2",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        -3e-05,
+        0.00015,
+        -0.16
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0373,
+        -0.0342,
+        -0.1169
+      ],
+      "aabb_max_mm": [
+        0.0202,
+        0.0132,
+        -0.0099
+      ]
+    },
+    {
+      "name": "rm_tarsus4",
+      "parent": "rm_tarsus3",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        -0.00013,
+        0.00019,
+        -0.0911
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0303,
+        -0.0299,
+        -0.0826
+      ],
+      "aabb_max_mm": [
+        0.0171,
+        0.0105,
+        -0.0122
+      ]
+    },
+    {
+      "name": "rm_tarsus5",
+      "parent": "rm_tarsus4",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.0009,
+        -0.0001,
+        -0.0635
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0386,
+        -0.0416,
+        -0.1107
+      ],
+      "aabb_max_mm": [
+        0.0227,
+        0.02,
+        -0.006
+      ]
+    },
+    {
+      "name": "rh_coxa",
+      "parent": "c_thorax",
+      "category": "leg",
+      "dofs": [
+        "yaw",
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {
+        "pitch": 24.0,
+        "roll": -134.0,
+        "yaw": -3.0
+      },
+      "local_pos_mm": [
+        -0.784,
+        -0.087,
+        -0.497
+      ],
+      "local_quat_wxyz": [
+        0.377052,
+        -0.201323,
+        0.05764,
+        -0.902208
+      ],
+      "aabb_min_mm": [
+        -0.1028,
+        -0.1103,
+        -0.227
+      ],
+      "aabb_max_mm": [
+        0.0708,
+        0.051,
+        0.0404
+      ]
+    },
+    {
+      "name": "rh_trochanterfemur",
+      "parent": "rh_coxa",
+      "category": "leg",
+      "dofs": [
+        "pitch",
+        "roll"
+      ],
+      "neutral_deg": {
+        "pitch": -111.0,
+        "roll": -4.0
+      },
+      "local_pos_mm": [
+        -0.00018,
+        0.00023,
+        -0.199
+      ],
+      "local_quat_wxyz": [
+        0.566061,
+        0.028762,
+        -0.823624,
+        -0.019767
+      ],
+      "aabb_min_mm": [
+        -0.0619,
+        -0.0743,
+        -0.8692
+      ],
+      "aabb_max_mm": [
+        0.1077,
+        0.0916,
+        0.0046
+      ]
+    },
+    {
+      "name": "rh_tibia",
+      "parent": "rh_trochanterfemur",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": 101.0
+      },
+      "local_pos_mm": [
+        0.00011,
+        -0.00029,
+        -0.836
+      ],
+      "local_quat_wxyz": [
+        0.636078,
+        -0.0,
+        0.771625,
+        -0.0
+      ],
+      "aabb_min_mm": [
+        -0.0604,
+        -0.056,
+        -0.7289
+      ],
+      "aabb_max_mm": [
+        0.0729,
+        0.0595,
+        0.0311
+      ]
+    },
+    {
+      "name": "rh_tarsus1",
+      "parent": "rh_tibia",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        -0.0,
+        0.00032,
+        -0.684
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0699,
+        -0.055,
+        -0.3738
+      ],
+      "aabb_max_mm": [
+        0.023,
+        0.0269,
+        0.0004
+      ]
+    },
+    {
+      "name": "rh_tarsus2",
+      "parent": "rh_tarsus1",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.0001,
+        -0.00051,
+        -0.353
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0548,
+        -0.0456,
+        -0.1972
+      ],
+      "aabb_max_mm": [
+        0.0242,
+        0.0179,
+        -0.0008
+      ]
+    },
+    {
+      "name": "rh_tarsus3",
+      "parent": "rh_tarsus2",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.00012,
+        0.00026,
+        -0.175
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0404,
+        -0.0356,
+        -0.1101
+      ],
+      "aabb_max_mm": [
+        0.0111,
+        0.0106,
+        -0.0023
+      ]
+    },
+    {
+      "name": "rh_tarsus4",
+      "parent": "rh_tarsus3",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        -0.00026,
+        -0.00033,
+        -0.0967
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0363,
+        -0.033,
+        -0.0881
+      ],
+      "aabb_max_mm": [
+        0.011,
+        0.012,
+        0.0001
+      ]
+    },
+    {
+      "name": "rh_tarsus5",
+      "parent": "rh_tarsus4",
+      "category": "leg",
+      "dofs": [
+        "pitch"
+      ],
+      "neutral_deg": {
+        "pitch": -5.0
+      },
+      "local_pos_mm": [
+        0.00021,
+        -6e-05,
+        -0.0733
+      ],
+      "local_quat_wxyz": [
+        0.999048,
+        0.0,
+        -0.043619,
+        0.0
+      ],
+      "aabb_min_mm": [
+        -0.0539,
+        -0.0455,
+        -0.107
+      ],
+      "aabb_max_mm": [
+        0.0174,
+        0.0202,
+        -0.0009
+      ]
+    }
+  ],
+  "legs": {
+    "lf": {
+      "side": "left",
+      "position": "f",
+      "rest_tip_mm": [
+        1.3647,
+        1.012,
+        0.2065
+      ],
+      "sweep_dof": "coxa.roll",
+      "sweep_sign_forward": -1,
+      "lift_dof": "trochanterfemur.pitch",
+      "lift_sign_up": -1,
+      "flex_dof": "tibia.pitch",
+      "flex_sign_up": -1,
+      "probes": {
+        "coxa.yaw": [
+          -0.0026,
+          0.0392,
+          0.0399
+        ],
+        "coxa.pitch": [
+          -0.1321,
+          -0.0962,
+          -0.2151
+        ],
+        "coxa.roll": [
+          -0.19,
+          0.1968,
+          0.0082
+        ],
+        "trochanterfemur.pitch": [
+          -0.1144,
+          -0.0335,
+          -0.2467
+        ],
+        "trochanterfemur.roll": [
+          0.1085,
+          -0.158,
+          -0.011
+        ],
+        "tibia.pitch": [
+          -0.1347,
+          -0.0727,
+          -0.132
+        ]
+      }
+    },
+    "rf": {
+      "side": "right",
+      "position": "f",
+      "rest_tip_mm": [
+        1.3647,
+        -1.012,
+        0.2065
+      ],
+      "sweep_dof": "coxa.roll",
+      "sweep_sign_forward": 1,
+      "lift_dof": "trochanterfemur.pitch",
+      "lift_sign_up": -1,
+      "flex_dof": "tibia.pitch",
+      "flex_sign_up": -1,
+      "mirrored_from": "lf"
+    },
+    "lm": {
+      "side": "left",
+      "position": "m",
+      "rest_tip_mm": [
+        0.3,
+        1.4698,
+        0.063
+      ],
+      "sweep_dof": "coxa.roll",
+      "sweep_sign_forward": -1,
+      "lift_dof": "trochanterfemur.pitch",
+      "lift_sign_up": -1,
+      "flex_dof": "tibia.pitch",
+      "flex_sign_up": -1,
+      "probes": {
+        "coxa.yaw": [
+          -0.0737,
+          0.0114,
+          -0.0433
+        ],
+        "coxa.pitch": [
+          -0.0801,
+          -0.1179,
+          -0.2278
+        ],
+        "coxa.roll": [
+          -0.2567,
+          0.0578,
+          0.0265
+        ],
+        "trochanterfemur.pitch": [
+          -0.0502,
+          -0.0974,
+          -0.2404
+        ],
+        "trochanterfemur.roll": [
+          0.184,
+          -0.0403,
+          0.0293
+        ],
+        "tibia.pitch": [
+          -0.0765,
+          -0.168,
+          -0.1264
+        ]
+      }
+    },
+    "rm": {
+      "side": "right",
+      "position": "m",
+      "rest_tip_mm": [
+        0.3,
+        -1.4698,
+        0.063
+      ],
+      "sweep_dof": "coxa.roll",
+      "sweep_sign_forward": 1,
+      "lift_dof": "trochanterfemur.pitch",
+      "lift_sign_up": -1,
+      "flex_dof": "tibia.pitch",
+      "flex_sign_up": -1,
+      "mirrored_from": "lm"
+    },
+    "lh": {
+      "side": "left",
+      "position": "h",
+      "rest_tip_mm": [
+        -1.4744,
+        1.0258,
+        -0.0742
+      ],
+      "sweep_dof": "trochanterfemur.roll",
+      "sweep_sign_forward": 1,
+      "lift_dof": "trochanterfemur.pitch",
+      "lift_sign_up": -1,
+      "flex_dof": "tibia.pitch",
+      "flex_sign_up": -1,
+      "probes": {
+        "coxa.yaw": [
+          -0.1522,
+          -0.1647,
+          0.0603
+        ],
+        "coxa.pitch": [
+          0.0854,
+          -0.1659,
+          -0.2403
+        ],
+        "coxa.roll": [
+          -0.1316,
+          -0.1393,
+          0.0514
+        ],
+        "trochanterfemur.pitch": [
+          0.0669,
+          -0.1375,
+          -0.2339
+        ],
+        "trochanterfemur.roll": [
+          0.1906,
+          0.1663,
+          -0.034
+        ],
+        "tibia.pitch": [
+          0.1425,
+          -0.1795,
+          -0.1166
+        ]
+      }
+    },
+    "rh": {
+      "side": "right",
+      "position": "h",
+      "rest_tip_mm": [
+        -1.4744,
+        -1.0258,
+        -0.0742
+      ],
+      "sweep_dof": "trochanterfemur.roll",
+      "sweep_sign_forward": -1,
+      "lift_dof": "trochanterfemur.pitch",
+      "lift_sign_up": -1,
+      "flex_dof": "tibia.pitch",
+      "flex_sign_up": -1,
+      "mirrored_from": "lh"
+    }
+  },
+  "wings": {
+    "l_wing": {
+      "flap_dof": "yaw",
+      "flap_sign_up": 1
+    },
+    "r_wing": {
+      "flap_dof": "yaw",
+      "flap_sign_up": -1
+    }
+  }
+}

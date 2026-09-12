@@ -1,8 +1,15 @@
 # VFB Fly Explorer
 
-A Godot 4 app that puts [Virtual Fly Brain](https://virtualflybrain.org) (VFB)
-anatomy inside a fully articulated fly body and lets you walk it around in 3D.
-Works on phones, tablets and PCs (web build) and as downloadable desktop apps.
+[Virtual Fly Brain](https://virtualflybrain.org) (VFB) anatomy inside a fully
+articulated fly body that you can walk around, poke, and show videos to.
+
+Two front ends share one data pipeline:
+
+* **Web app** (`web/`): browser-first, built with Three.js and plain ES modules
+  (no bundler, no Godot). Runs on phones, tablets and PCs. This is what Render
+  serves.
+* **Desktop app** (`godot/`): Godot 4 project exported to Windows, Linux and
+  macOS executables.
 
 * **Body**: [NeuroMechFly v2](https://github.com/NeLy-EPFL/flygym) (EPFL),
   a micro-CT based *Drosophila* model with 69 jointed segments. A procedural
@@ -16,11 +23,16 @@ Works on phones, tablets and PCs (web build) and as downloadable desktop apps.
   body startles it.
 
 * **Live brain view**: a picture-in-picture camera on the brain, with regions
-  glowing by function (seeing, smelling, steering, memory, moving…) according
-  to what the fly is doing. Illustrative, not a recording of real activity.
-* **Show it a video**: paste a YouTube link (or open `?v=VIDEO_ID`). The video
-  plays in an overlay, the fly turns to watch, and a reaction plan (mood plus
-  timed beats) drives its behaviour. Share the link so others see the same.
+  glowing by function (seeing, smelling, steering, memory, moving, pain…)
+  according to what the fly is doing. Illustrative, not real recordings.
+* **Feelings**: a modelled set of drives and affects (pain, pleasure, hunger,
+  fear, curiosity, excitement, calm, tiredness, disgust) shown as gauges. They
+  rise and fall with pokes, videos, movement and rest, and feed the story.
+* **Show it a video** (web): paste a YouTube link (or open `?v=VIDEO_ID`).
+  The video plays on a screen standing in the 3D world; the fly turns to face
+  it and a reaction plan (mood plus timed beats) drives its behaviour.
+  **Fly's eye view** fills your screen with the video seen through a
+  compound-eye mosaic, with the brain's visual centres lit up.
 * **Live story**: a running plain-language description of what the fly is
   doing, how it feels and what it is paying attention to. Programmatic by
   default; richer lines come from Claude when the API service has a key.
@@ -60,6 +72,21 @@ placement controls (offset in mm in the head frame, and scale).
 ## Repository layout
 
 ```
+web/                  Browser-first web app (Three.js, ES modules, no build step)
+  index.html, styles.css
+  src/main.js         entry: loads assets, wires everything, animation loop
+  src/scene.js        renderer, camera/orbit, lights, floor, brain PiP pass
+  src/fly.js          GLB loading + procedural rig (gait, flight, reactions)
+  src/brain.js        VFB anatomy inside the head, selection, picking
+  src/activity.js     functional brain-activity model (glow + meters)
+  src/feelings.js     affect model shown as gauges
+  src/narrator.js     live doing / feeling / focus text, optional AI lines
+  src/video.js        YouTube screen in 3D (CSS3D), fly's-eye view, reaction plans
+  src/vfb.js          VFB SOLR client, OBJ/SWC parsers
+  src/ui.js           DOM UI, layouts, joystick
+  vendor/three/       vendored Three.js + addons
+  data/               generated at build time (fly GLB, rig, VFB GLBs)
+  test/smoke.py       CI browser smoke test
 server/               Optional API service (FastAPI): YouTube metadata, Claude narration
   app.py              /api/health /api/youtube /api/narrate /api/react (all with fallbacks)
   tests/              pytest (no network, Claude client mocked)
@@ -105,12 +132,24 @@ python tools/build_fly_body.py    # sparse-clones flygym into .cache/, writes go
 python tools/fetch_vfb.py         # downloads the VFB starter set into godot/assets/generated/vfb/
 ```
 
-Then open `godot/` in the Godot editor and press Play, or headless:
+### Web app
+
+```bash
+cp -r godot/assets/generated/fly godot/assets/generated/vfb web/data/   # or symlink
+python -m http.server 8080 -d web      # any static server works
+# open http://localhost:8080/
+```
+
+Without the pipeline the app still runs with a boxy placeholder body and no
+bundled brain; searching VFB then loads everything live.
+
+### Desktop app
+
+Open `godot/` in the Godot editor and press Play, or headless:
 
 ```bash
 godot --headless --path godot --import
 godot --headless --path godot -s tests/test_parsers.gd
-godot --headless --path godot --export-release "Web" ../build/web/index.html
 godot --headless --path godot --export-release "Linux" ../build/linux/vfb-fly-explorer.x86_64
 ```
 
@@ -133,10 +172,12 @@ at runtime from the search box.
 
 1. **assets** – pytest, `build_fly_body.py`, `fetch_vfb.py` (tolerant: whatever
    VFB serves gets bundled; the step summary reports the counts).
-2. **export** – Godot 4.4.1 headless export for Linux, Windows, macOS, Web
+2. **export** – Godot 4.4.1 headless export for Linux, Windows, macOS
    (Godot binary and templates are cached).
-3. **release** – GitHub Release tagged `build-<run number>` with all archives.
-4. **web-publish** – pushes `build/web` to the `web-dist` branch.
+3. **web** – assembles `web/` plus the generated data into `build/web`,
+   syntax-checks the modules and runs a headless-Chromium smoke test.
+4. **release** – GitHub Release tagged `build-<run number>` with all archives.
+5. **web-publish** – pushes `build/web` to the `web-dist` branch.
 
 Pull requests run steps 1–2 only.
 
@@ -160,7 +201,7 @@ After the first `main` build has created `web-dist`:
    and, once CI updates `web-dist`, the site.
 
 The web app looks for the API at `https://vfb-fly-explorer-api.onrender.com`
-(set in `godot/web/shell.html`). If Render gives your service a different
+(set in `web/index.html`). If Render gives your service a different
 URL, change it there or open the site with `?api=https://your-service`.
 Desktop builds read `VFB_API_BASE` from the environment. Without the API
 everything still works: narration and video reactions fall back to the
@@ -170,10 +211,11 @@ The export is Godot's non-threaded web variant, so no COOP/COEP headers are
 needed and cross-origin requests to virtualflybrain.org keep working. The same
 branch also works with GitHub Pages if you prefer.
 
-Web caveats: no shadows, first load is ~45 MB of wasm, live VFB downloads
-depend on the browser's CORS rules (the bundled starter set always works), and
-the YouTube overlay is an iframe on top of the canvas, so it only exists in the
-web build (desktop builds show the thumbnail and a "Play reaction" button).
+Web caveats: live VFB downloads depend on the browser's CORS rules (the
+bundled starter set always works). The YouTube screen is an iframe projected
+into the 3D scene, so it starts muted (browsers require a tap to unmute) and
+only exists in the web app; desktop builds show the thumbnail and a "Play
+reaction" button.
 
 ## Coordinate frames
 
