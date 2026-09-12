@@ -163,6 +163,9 @@ func _ready() -> void:
 	if not manifest.is_empty():
 		_load_bundled.call_deferred()
 	_check_api.call_deferred()
+	WebBridge.expose("onVideoLink", func(args: Array):
+		if args.size() > 0:
+			_start_video(str(args[0])))
 	var v := WebBridge.query_param("v")
 	if not v.is_empty():
 		_start_video.call_deferred(v)
@@ -390,7 +393,7 @@ func _process(delta: float) -> void:
 	if _idle_variant_timer > 9.0:
 		_idle_variant_timer = 0.0
 		_idle_variant += 1
-	if _ctx_timer > 0.25:
+	if _ctx_timer > 0.1:
 		_ctx_timer = 0.0
 		var ctx := _context()
 		activity.set_context(ctx)
@@ -422,11 +425,16 @@ func _context() -> Dictionary:
 
 
 func _update_video_overlay() -> void:
-	if not WebBridge.is_web() or not watch.has_video():
+	if not WebBridge.is_web():
+		return
+	var f := get_tree().root.content_scale_factor / maxf(WebBridge.device_pixel_ratio(), 0.01)
+	var link := ui.link_slot_rect()
+	var lr: Rect2 = link["rect"]
+	WebBridge.set_link_rect(Rect2(lr.position * f, lr.size * f), bool(link["visible"]))
+	if not watch.has_video():
 		return
 	var info := ui.video_slot_rect()
 	var rect: Rect2 = info["rect"] if info["visible"] else ui.mini_video_rect()
-	var f := get_tree().root.content_scale_factor / maxf(WebBridge.device_pixel_ratio(), 0.01)
 	WebBridge.set_video_rect(Rect2(rect.position * f, rect.size * f), true)
 
 
@@ -464,6 +472,7 @@ func _start_video(text: String) -> void:
 	if not watch.load(text):
 		ui.set_status("That doesn't look like a YouTube link.")
 		return
+	WebBridge.set_link_value("")
 	ui.set_status("Loading video…")
 	ui.show_watch_tab()
 	_face_viewer = true

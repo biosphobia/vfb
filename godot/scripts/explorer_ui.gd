@@ -59,6 +59,7 @@ var meter_box: VBoxContainer
 var brain_pip: PanelContainer
 var brain_pip_tex: TextureRect
 var video_box: LineEdit
+var link_slot: Control
 var video_slot: Control
 var video_thumb: TextureRect
 var video_title: Label
@@ -263,6 +264,16 @@ func _build_watch() -> Control:
 	video_box.text_submitted.connect(func(t): video_requested.emit(t))
 	row.add_child(video_box)
 	_button(row, "Show", func(): video_requested.emit(video_box.text)).custom_minimum_size.y = 40
+	# On the web the browser draws a real input on top of this slot (phones cannot
+	# type or paste into a canvas text box); the Godot row above is hidden there.
+	link_slot = Control.new()
+	link_slot.custom_minimum_size = Vector2(0, 44)
+	link_slot.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	v.add_child(link_slot)
+	if WebBridge.is_web():
+		row.visible = false
+	else:
+		link_slot.visible = false
 	video_slot = Control.new()
 	video_slot.custom_minimum_size = Vector2(0, 170)
 	video_slot.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -701,6 +712,11 @@ func is_sheet_open() -> bool:
 func video_slot_rect() -> Dictionary:
 	var visible_now := video_slot.is_visible_in_tree() and _has_video
 	return {"rect": video_slot.get_global_rect(), "visible": visible_now}
+
+
+## Rect of the native link input slot in logical pixels, and whether it is on screen.
+func link_slot_rect() -> Dictionary:
+	return {"rect": link_slot.get_global_rect(), "visible": link_slot.is_visible_in_tree() and (welcome == null or not welcome.visible)}
 
 
 func mini_video_rect() -> Rect2:

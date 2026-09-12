@@ -25,6 +25,12 @@ body { color: white; background-color: #12151c; overflow: hidden; touch-action: 
 #status-notice { background-color: #5b3943; border-radius: 0.5rem; border: 1px solid #9b3943; color: #e0e0e0; line-height: 1.3; margin: 0 2rem; overflow: hidden; padding: 1rem; text-align: center; z-index: 1; }
 #video-wrap { position: absolute; display: none; z-index: 5; background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 6px 24px rgba(0,0,0,.45); }
 #video-wrap iframe, #player { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+#link-wrap { position: absolute; display: none; z-index: 6; box-sizing: border-box; }
+#link-form { display: flex; gap: 6px; width: 100%; height: 100%; align-items: stretch; }
+#link-input { flex: 1; min-width: 0; font-size: 16px; padding: 0 10px; border-radius: 8px; border: 1px solid #3a4152; background: #1b1f28; color: #fff; outline: none; }
+#link-input:focus { border-color: #57d2ff; }
+#link-form button { font-size: 15px; padding: 0 12px; border-radius: 8px; border: 1px solid #3a4152; background: #262b36; color: #fff; }
+#link-form button:active { background: #3a4152; }
 		</style>
 		$GODOT_HEAD_INCLUDE
 	</head>
@@ -32,6 +38,13 @@ body { color: white; background-color: #12151c; overflow: hidden; touch-action: 
 		<canvas id="canvas">Your browser does not support the canvas tag.</canvas>
 		<noscript>Your browser does not support JavaScript.</noscript>
 		<div id="video-wrap"><div id="player"></div></div>
+		<div id="link-wrap">
+			<form id="link-form" autocomplete="off">
+				<input id="link-input" type="url" inputmode="url" enterkeyhint="go" placeholder="Paste a YouTube link" aria-label="YouTube link">
+				<button type="button" id="link-paste" title="Paste from clipboard">Paste</button>
+				<button type="submit" id="link-go">Show</button>
+			</form>
+		</div>
 		<div id="status">
 			<img id="status-splash" class="$GODOT_SPLASH_CLASSES" src="$GODOT_SPLASH" alt="">
 			<progress id="status-progress"></progress>
@@ -98,6 +111,36 @@ window.VFB_CONFIG = {
 		wrap.style.height = h + 'px';
 		wrap.style.display = (visible && pendingId) ? 'block' : 'none';
 	};
+	// ---- native link input (Godot text boxes cannot receive paste / keyboard on phones) ----
+	var linkWrap = document.getElementById('link-wrap');
+	var linkInput = document.getElementById('link-input');
+	function submitLink() {
+		var v = (linkInput.value || '').trim();
+		if (!v) { linkInput.focus(); return; }
+		if (window.vfbBridge && window.vfbBridge.onVideoLink) {
+			try { window.vfbBridge.onVideoLink(v); } catch (e) { console.warn(e); }
+		}
+		linkInput.blur();
+	}
+	document.getElementById('link-form').addEventListener('submit', function (e) { e.preventDefault(); submitLink(); });
+	document.getElementById('link-paste').addEventListener('click', function () {
+		if (navigator.clipboard && navigator.clipboard.readText) {
+			navigator.clipboard.readText().then(function (t) {
+				if (t) { linkInput.value = t; submitLink(); } else { linkInput.focus(); }
+			}).catch(function () { linkInput.focus(); });
+		} else {
+			linkInput.focus();
+		}
+	});
+	linkInput.addEventListener('paste', function () { setTimeout(submitLink, 50); });
+	window.vfbSetLinkRect = function (x, y, w, h, visible) {
+		linkWrap.style.left = x + 'px';
+		linkWrap.style.top = y + 'px';
+		linkWrap.style.width = w + 'px';
+		linkWrap.style.height = h + 'px';
+		linkWrap.style.display = visible ? 'block' : 'none';
+	};
+	window.vfbSetLinkValue = function (v) { linkInput.value = v || ''; };
 	window.vfbCopy = function (text) {
 		if (navigator.clipboard && navigator.clipboard.writeText) {
 			navigator.clipboard.writeText(text).catch(function () { window.prompt('Copy this link', text); });

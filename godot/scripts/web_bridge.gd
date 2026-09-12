@@ -68,6 +68,16 @@ static func set_video_rect(rect: Rect2, visible: bool) -> void:
 		int(rect.position.x), int(rect.position.y), int(rect.size.x), int(rect.size.y), "true" if visible else "false"])
 
 
+## Position the native link input (CSS pixels). Web only.
+static func set_link_rect(rect: Rect2, visible: bool) -> void:
+	eval("window.vfbSetLinkRect && window.vfbSetLinkRect(%d,%d,%d,%d,%s)" % [
+		int(rect.position.x), int(rect.position.y), int(rect.size.x), int(rect.size.y), "true" if visible else "false"])
+
+
+static func set_link_value(text: String) -> void:
+	eval("window.vfbSetLinkValue && window.vfbSetLinkValue(%s)" % JSON.stringify(text))
+
+
 static func copy_text(text: String) -> bool:
 	if not is_web():
 		DisplayServer.clipboard_set(text)
